@@ -1,0 +1,9 @@
+{
+  "name": "react-monorepo-nx-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/react-monorepo-nx-e2e/src",
+  "implicitDependencies": ["react-monorepo-nx"],
+  "// targets": "to see all targets run: nx show project react-monorepo-nx-e2e --web",
+  "targets": {}
+}
