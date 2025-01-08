@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 211 24% 17%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --primary: 218.76 72.2% 56.27%;
+  --primary-foreground: 211 24% 17%;
+  --secondary: 324.29 71.59% 65.49%;
+  --secondary-foreground: 211 24% 17%;
+  --info: 209 100% 55%;
+  --success: 106 67% 51%;
+  --warning: 45 100% 51%;
+  --error: 2 100% 63%;
+  --error-foreground: 211 24% 17%;
+  --radius: 0.5rem;
+  --ring: 215 20.2% 65.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 211 24% 17%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --card: 0 0% 100%;
+  --card-foreground: 211 24% 17%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 240 4.8% 95.9%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 5.9% 10%;
+  --muted-foreground: 240 4.4% 58%;
+  --accent: 240 5.9% 10%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 3.8% 46.1%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+}

@@ -2,8 +2,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "composite": true,
+    "declaration": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
-    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,7 +16,22 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ap2p/api-client": ["libs/core/api-client/src/index.ts"],
+      "@ap2p/auth": ["libs/auth/src/index.ts"],
+      "@ap2p/ui": ["libs/shared/ui/src/index.ts"],
+      "@ap2p/utils": ["libs/shared/utils/src/index.ts"],
+      "api/*": ["apps/ap2p/src/api/*"],
+      "assets/*": ["./apps/ap2p/src/assets/*"],
+      "context/*": ["apps/ap2p/src/context/*"],
+      "features/*": ["apps/ap2p/src/features/*"],
+      "hooks/*": ["apps/ap2p/src/hooks/*"],
+      "i18n/*": ["apps/ap2p/src/i18n/*"],
+      "integrations/*": ["apps/ap2p/src/integrations/*"],
+      "providers/*": ["apps/ap2p/src/providers/*"],
+      "tests/*": ["apps/ap2p/src/tests/*"],
+      "types/*": ["apps/ap2p/src/types/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

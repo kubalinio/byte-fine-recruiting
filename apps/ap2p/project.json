@@ -1,0 +1,9 @@
+{
+  "name": "ap2p",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ap2p/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project ap2p --web",
+  "targets": {}
+}
