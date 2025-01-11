@@ -1,11 +1,8 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import type { FieldValues, Path } from "react-hook-form";
-
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useFormContext } from "react-hook-form";
+import type { FieldValues, Path } from "react-hook-form"
 
 import {
   FormControl,
@@ -14,23 +11,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "@ap2p/ui";
-import { cn } from "@ap2p/utils";
+  Input
+} from "@ap2p/ui"
+import { cn } from "@ap2p/utils"
+import { useLocale } from "hooks/index"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { useFormContext } from "react-hook-form"
 
 type NPasswordFieldProps = {
-  className?: string;
-  label?: string;
-  placeholder?: string;
-  description?: string;
-  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
-  showError?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  className?: string
+  label?: string
+  placeholder?: string
+  description?: string
+  type?: React.InputHTMLAttributes<HTMLInputElement>["type"]
+  showError?: boolean
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 type InputControllerType<T extends FieldValues> = {
-  name: Path<T>;
-  requiredStar?: boolean;
-};
+  name: Path<T>
+  requiredStar?: boolean
+}
 
 interface ControlledPasswordProps<T extends FieldValues>
   extends Omit<NPasswordFieldProps, "name">,
@@ -47,9 +47,10 @@ const ControlledPasswordField = <T extends FieldValues>({
   requiredStar = false,
   ...props
 }: ControlledPasswordProps<T>) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
+  const { formatMessage } = useLocale()
 
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false)
 
   return (
     <FormField
@@ -60,16 +61,16 @@ const ControlledPasswordField = <T extends FieldValues>({
           {label && (
             <FormLabel>
               {label}{" "}
-              {requiredStar && <span className="text-error-600 -ml-px">*</span>}
+              {requiredStar && <span className='text-error-600 -ml-px'>*</span>}
             </FormLabel>
           )}
 
-          <div className="relative w-full">
+          <div className='relative w-full'>
             <FormControl>
               <Input
                 type={passwordVisibility ? "text" : "password"}
                 placeholder={placeholder}
-                className="pr-12"
+                className='pr-12'
                 autoComplete={autoComplete ?? "current-password"}
                 {...props}
                 {...field}
@@ -78,24 +79,24 @@ const ControlledPasswordField = <T extends FieldValues>({
             </FormControl>
 
             <button
-              type="button"
+              type='button'
               onClick={() => {
-                setPasswordVisibility((prev) => !prev);
+                setPasswordVisibility((prev) => !prev)
               }}
-              className="absolute inset-y-0 right-0 cursor-pointer p-3 text-gray-500"
+              className='absolute inset-y-0 right-0 cursor-pointer px-3 text-gray-500'
             >
-              {passwordVisibility && <EyeIcon />}
-              {!passwordVisibility && <EyeOffIcon />}
+              {passwordVisibility && <EyeIcon className='h-5 w-5' />}
+              {!passwordVisibility && <EyeOffIcon className='h-5 w-5' />}
             </button>
           </div>
 
           {description && <FormDescription>{description}</FormDescription>}
 
-          {showError && <FormMessage />}
+          {showError && <FormMessage t={formatMessage} />}
         </FormItem>
       )}
     />
-  );
-};
+  )
+}
 
-export { ControlledPasswordField };
+export { ControlledPasswordField }

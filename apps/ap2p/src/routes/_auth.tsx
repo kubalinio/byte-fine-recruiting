@@ -1,21 +1,21 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: ({ context }) => {
     if (context.auth.isAuthenticated) {
       throw redirect({
         to: "/dashboard",
-        replace: true,
-      });
+        replace: true
+      })
     }
   },
-  component: () => <AuthLayout />,
-});
+  component: () => <AuthLayout />
+})
 
 const AuthLayout = () => {
   return (
-    <main className="grid items-center justify-center h-screen">
+    <main className='grid h-screen grid-cols-12 items-center justify-center'>
       <Outlet />
     </main>
-  );
-};
+  )
+}

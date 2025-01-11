@@ -1,42 +1,45 @@
-export type LoginMutationArguments = {
-  username: string;
-  password: string;
-};
+import { z } from "zod"
 
-export type LoginMutationResponse = {
-  accessToken: string;
-  tokenType: string;
-  expires: number;
-  refreshToken: string;
-};
+import { SignInFormSchema, SignUpFormSchema } from "./auth.validators"
+
+export type SignUpFormSchemaType = z.infer<typeof SignUpFormSchema>
+export type SignUpMutationArgs = z.infer<typeof SignUpFormSchema>
+
+export type SignInFormTypes = z.infer<typeof SignInFormSchema>
+export type SignInMutationArgs = z.infer<typeof SignInFormSchema>
+export type SignInMutationResponse = {
+  access_token: string
+  refresh_token: string
+  token_type: string
+}
 
 export type GetMeQueryResponse = {
-  firstName: string;
-  lastName: string;
-  username: string;
-};
+  first_name: string
+  last_name: string
+  username: string
+}
 
 export type User = {
-  id: string;
-  name: string;
-};
+  id: string
+  name: string
+}
 
 export type GetUsersResponse = {
-  users: User[];
-  nextPage?: number | null;
-};
+  users: User[]
+  nextPage?: number | null
+}
 
 export type GetUsersInfiniteArgs = {
-  count?: string;
-};
+  count?: string
+}
 
 export type GetUsersListArgs = {
-  page?: string;
-};
+  page?: string
+}
 
 export type RefreshTokenMutationResponse = {
-  accessToken: string;
-  refreshToken: string;
-};
+  access_token: string
+  refresh_token: string
+}
 
 // API_ACTION_TYPES

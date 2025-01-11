@@ -1,49 +1,61 @@
-import { Button, Form } from "@ap2p/ui";
-import { useForm } from "react-hook-form";
+import { SignInFormSchema, SignInFormTypes } from "@ap2p/auth"
+import { Button, Form } from "@ap2p/ui"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
+  ControlledCheckboxField,
   ControlledInputField,
-  ControlledPasswordField,
-} from "../../shared/components/form-fields";
+  ControlledPasswordField
+} from "features/shared/components/form-fields"
+import { Link } from "features/shared/components/Link"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 type SignInFormProps = {
-  onSubmit: (data: any) => void;
-  isLoading: boolean;
-  isSubmitted: boolean;
-};
-
-type SignInFormValues = {
-  email: string;
-};
+  onSubmit: SubmitHandler<SignInFormTypes>
+  isLoading: boolean
+  isSubmitted: boolean
+}
 
 const SignInForm = ({ onSubmit, isLoading, isSubmitted }: SignInFormProps) => {
-  const form = useForm<SignInFormValues>({
+  const form = useForm<SignInFormTypes>({
     mode: "onSubmit",
+    reValidateMode: "onSubmit",
+    resolver: zodResolver(SignInFormSchema),
     defaultValues: {
-      email: "",
-    },
-  });
+      username: "",
+      password: ""
+    }
+  })
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4"
+        className='flex w-full flex-col gap-y-6'
       >
-        <ControlledInputField name="email" label="Email" />
+        <ControlledInputField name='username' label='Email' />
 
-        <ControlledPasswordField name="password" label="Password" />
+        <ControlledPasswordField name='password' label='Password' />
+
+        <div className='flex justify-end'>
+          <ControlledCheckboxField
+            name='rememberMe'
+            label='Remember this account for 30 days'
+          />
+
+          <Link to='/forgot-password'>Forgot password?</Link>
+        </div>
 
         <Button
-          type="submit"
+          type='submit'
           disabled={isLoading || isSubmitted}
           loading={isLoading}
-          className="w-fit ml-auto"
+          size='sm'
         >
           Sign In
         </Button>
       </form>
     </Form>
-  );
-};
+  )
+}
 
-export { SignInForm };
+export { SignInForm }

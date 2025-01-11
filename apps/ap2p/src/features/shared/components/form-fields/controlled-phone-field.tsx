@@ -1,10 +1,6 @@
-"use client";
+"use client"
 
-import React from "react";
-
-import type { FieldValues, Path } from "react-hook-form";
-
-import { useFormContext } from "react-hook-form";
+import type { FieldValues, Path } from "react-hook-form"
 
 import {
   FormControl,
@@ -13,23 +9,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  PhoneInput,
-} from "@ap2p/ui";
-import { cn } from "@ap2p/utils";
+  PhoneInput
+} from "@ap2p/ui"
+import { cn } from "@ap2p/utils"
+import { useLocale } from "hooks/index"
+import { useFormContext } from "react-hook-form"
 
 type NPhoneInputProps = {
-  className?: string;
-  label?: string;
-  description?: string;
-  showError?: boolean;
-  icon?: boolean;
-  notTranslate?: boolean;
-  placeholder?: string;
-};
+  className?: string
+  label?: string
+  description?: string
+  showError?: boolean
+  icon?: boolean
+  notTranslate?: boolean
+  placeholder?: string
+}
 
 type PhoneControllerType<T extends FieldValues> = {
-  name: Path<T>;
-};
+  name: Path<T>
+}
 
 interface ControlledPhoneProps<T extends FieldValues>
   extends Omit<NPhoneInputProps, "name">,
@@ -43,10 +41,10 @@ const ControlledPhoneField = <T extends FieldValues>({
   placeholder,
   showError = true,
   icon = false,
-  notTranslate = false,
+  notTranslate = false
 }: ControlledPhoneProps<T>) => {
-  const { control } = useFormContext();
-
+  const { control } = useFormContext()
+  const { formatMessage } = useLocale()
   return (
     <FormField
       name={name}
@@ -59,18 +57,17 @@ const ControlledPhoneField = <T extends FieldValues>({
             <PhoneInput
               {...field}
               value={field.value}
-              icon={icon}
               placeholder={placeholder}
             />
           </FormControl>
 
           {description && <FormDescription>{description}</FormDescription>}
 
-          {showError && <FormMessage notTranslate={notTranslate} />}
+          {showError && <FormMessage t={formatMessage} />}
         </FormItem>
       )}
     />
-  );
-};
+  )
+}
 
-export { ControlledPhoneField };
+export { ControlledPhoneField }

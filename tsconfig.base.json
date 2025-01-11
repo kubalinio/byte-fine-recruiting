@@ -29,7 +29,6 @@
       "i18n/*": ["apps/ap2p/src/i18n/*"],
       "integrations/*": ["apps/ap2p/src/integrations/*"],
       "providers/*": ["apps/ap2p/src/providers/*"],
-      "tests/*": ["apps/ap2p/src/tests/*"],
       "types/*": ["apps/ap2p/src/types/*"]
     }
   },

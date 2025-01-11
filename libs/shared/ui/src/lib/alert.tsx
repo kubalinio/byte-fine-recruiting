@@ -1,11 +1,12 @@
-import * as React from "react";
+import * as React from "react"
 
-import type { VariantProps } from "@ap2p/utils";
-import { cn, cva } from "@ap2p/utils";
-import { X } from "lucide-react";
+import type { VariantProps } from "@ap2p/utils"
+
+import { cn, cva } from "@ap2p/utils"
+import { X } from "lucide-react"
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border p-4 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*:not(button)]:pl-10",
+  "relative w-full rounded-md border p-4 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*:not(button)]:pl-10",
   {
     variants: {
       variant: {
@@ -16,14 +17,14 @@ const alertVariants = cva(
           "border-warning bg-warning-lighter text-warning-darker [&>button]:border-warning-darker [&>button]:text-warning-darker [&>svg]:text-warning",
         success:
           "border-success bg-success-lighter text-success-darker [&>button]:border-success-darker [&>button]:text-success-darker [&>svg]:text-success",
-        info: "border-info bg-info-lighter text-info-darker [&>button]:border-info-darker [&>button]:text-info-darker [&>svg]:text-info",
-      },
+        info: "border-info bg-info-lighter text-info-darker [&>button]:border-info-darker [&>button]:text-info-darker [&>svg]:text-info"
+      }
     },
     defaultVariants: {
-      variant: "default",
-    },
+      variant: "default"
+    }
   }
-);
+)
 
 const Alert = React.forwardRef<
   HTMLDivElement,
@@ -32,11 +33,11 @@ const Alert = React.forwardRef<
   <div
     className={cn(alertVariants({ variant }), className)}
     ref={ref}
-    role="alert"
+    role='alert'
     {...props}
   />
-));
-Alert.displayName = "Alert";
+))
+Alert.displayName = "Alert"
 
 const AlertTitle = React.forwardRef<
   HTMLParagraphElement,
@@ -55,8 +56,8 @@ const AlertTitle = React.forwardRef<
         {children}
       </h5>
     )
-);
-AlertTitle.displayName = "AlertTitle";
+)
+AlertTitle.displayName = "AlertTitle"
 
 const AlertDescription = React.forwardRef<
   HTMLParagraphElement,
@@ -67,8 +68,8 @@ const AlertDescription = React.forwardRef<
     ref={ref}
     {...props}
   />
-));
-AlertDescription.displayName = "AlertDescription";
+))
+AlertDescription.displayName = "AlertDescription"
 
 const AlertActionButton = React.forwardRef<
   HTMLButtonElement,
@@ -76,14 +77,14 @@ const AlertActionButton = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <button
     className={cn(
-      "absolute right-3 top-1/2 h-[30px] -translate-y-1/2 rounded-lg border px-2 py-1 text-sm font-bold",
+      "absolute right-3 top-1/2 h-[30px] -translate-y-1/2 rounded-md border px-2 py-1 text-sm font-bold",
       className
     )}
     ref={ref}
     {...props}
   />
-));
-AlertActionButton.displayName = "AlertActionButton";
+))
+AlertActionButton.displayName = "AlertActionButton"
 
 const AlertCancelButton = React.forwardRef<
   HTMLButtonElement,
@@ -99,13 +100,13 @@ const AlertCancelButton = React.forwardRef<
   >
     <X />
   </button>
-));
-AlertCancelButton.displayName = "AlertCancelButton";
+))
+AlertCancelButton.displayName = "AlertCancelButton"
 
 export {
   Alert,
   AlertActionButton,
   AlertCancelButton,
   AlertDescription,
-  AlertTitle,
-};
+  AlertTitle
+}

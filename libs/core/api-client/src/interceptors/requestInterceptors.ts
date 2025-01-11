@@ -1,18 +1,19 @@
-import axios, { AxiosRequestHeaders, InternalAxiosRequestConfig } from "axios";
-import { jwtDecode } from "jwt-decode";
-import { authStorage } from "../context/auth-storage/auth-storage";
-import { RefreshTokenMutationResponse } from "../types";
-import { refreshTokenUrl } from "../axios";
+import { authStorage } from "@ap2p/auth"
+import axios, { AxiosRequestHeaders, InternalAxiosRequestConfig } from "axios"
+import { jwtDecode } from "jwt-decode"
+
+import { refreshTokenUrl } from "../axios"
+import { RefreshTokenMutationResponse } from "../types"
 
 export const requestSuccessInterceptor = async (
   config: InternalAxiosRequestConfig
 ): Promise<InternalAxiosRequestConfig> => {
   if (!authStorage.accessToken || authStorage.expires === null) {
-    return config;
+    return config
   }
 
-  const secondsSinceEpoch = Math.round(new Date().getTime() / 1000);
-  const isTokenExpired = secondsSinceEpoch >= authStorage.expires;
+  const secondsSinceEpoch = Math.round(new Date().getTime() / 1000)
+  const isTokenExpired = secondsSinceEpoch >= authStorage.expires
 
   if (isTokenExpired) {
     try {
@@ -20,30 +21,37 @@ export const requestSuccessInterceptor = async (
         refreshTokenUrl,
         {
           accessToken: authStorage.accessToken,
-          refreshToken: authStorage.refreshToken,
+          refreshToken: authStorage.refreshToken
         }
-      );
+      )
 
-      const { exp } = jwtDecode<{ exp: number }>(data.accessToken);
+      const { exp } = jwtDecode<{ exp: number }>(data.accessToken)
 
-      authStorage.accessToken = data.accessToken;
-      authStorage.expires = exp;
-      authStorage.refreshToken = data.refreshToken;
+      authStorage.accessToken = data.accessToken
+      authStorage.expires = exp
+      authStorage.refreshToken = data.refreshToken
     } catch (e) {
-      authStorage.accessToken = null;
-      authStorage.expires = null;
-      authStorage.refreshToken = null;
+      authStorage.accessToken = null
+      authStorage.expires = null
+      authStorage.refreshToken = null
     }
 
     return {
       ...config,
-      withCredentials: false,
+      withCredentials: true,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${authStorage.accessToken}`,
-      } as AxiosRequestHeaders,
-    };
+        Authorization: `Bearer ${authStorage.accessToken}`
+      } as AxiosRequestHeaders
+    }
   }
 
-  return config;
-};
+  return {
+    ...config,
+    withCredentials: true,
+    headers: {
+      ...config.headers,
+      Authorization: `Bearer ${authStorage.accessToken}`
+    } as AxiosRequestHeaders
+  }
+}

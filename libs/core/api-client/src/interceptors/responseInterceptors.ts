@@ -1,59 +1,62 @@
-import axios, { type AxiosError, AxiosResponse } from "axios";
-import { jwtDecode } from "jwt-decode";
+import type { AxiosError } from "axios"
+
+import { authStorage } from "@ap2p/auth"
+import axios, { AxiosResponse } from "axios"
+import { jwtDecode } from "jwt-decode"
+
+import { refreshTokenUrl } from "../axios"
 import {
   ExtendedAxiosRequestConfig,
   getStandardizedApiError,
-  RefreshTokenMutationResponse,
-} from "../types";
-import { authStorage } from "../context/auth-storage/auth-storage";
-import { refreshTokenUrl } from "../axios";
+  RefreshTokenMutationResponse
+} from "../types"
 
-export const responseSuccessInterceptor = (response: AxiosResponse) => response;
+export const responseSuccessInterceptor = (response: AxiosResponse) => response
 
 export const responseFailureInterceptor = async (
   error: AxiosError<unknown>
 ) => {
-  const standarizedError = getStandardizedApiError(error);
+  const standarizedError = getStandardizedApiError(error)
 
-  const originalRequest = error.config as ExtendedAxiosRequestConfig;
+  const originalRequest = error.config as ExtendedAxiosRequestConfig
 
   if (standarizedError.statusCode === 401 && originalRequest?._retry) {
-    authStorage.accessToken = null;
-    authStorage.expires = null;
-    authStorage.refreshToken = null;
+    authStorage.accessToken = null
+    authStorage.expires = null
+    authStorage.refreshToken = null
 
-    window.location.replace("/login");
+    window.location.replace("/sign-in")
 
-    return Promise.reject(standarizedError);
+    return Promise.reject(standarizedError)
   }
 
   if (standarizedError.statusCode === 401 && originalRequest) {
-    originalRequest._retry = true;
+    originalRequest._retry = true
 
     try {
       const { data } = await axios.post<RefreshTokenMutationResponse>(
         refreshTokenUrl,
         {
           accessToken: authStorage.accessToken,
-          refreshToken: authStorage.refreshToken,
+          refreshToken: authStorage.refreshToken
         }
-      );
-      const { exp } = jwtDecode<{ exp: number }>(data.accessToken);
+      )
+      const { exp } = jwtDecode<{ exp: number }>(data.accessToken)
 
-      authStorage.accessToken = data.accessToken;
-      authStorage.expires = exp;
-      authStorage.refreshToken = data.refreshToken;
+      authStorage.accessToken = data.accessToken
+      authStorage.expires = exp
+      authStorage.refreshToken = data.refreshToken
 
-      return axios(originalRequest);
+      return axios(originalRequest)
     } catch {
-      authStorage.accessToken = null;
-      authStorage.expires = null;
-      authStorage.refreshToken = null;
-      window.location.replace("/login");
+      authStorage.accessToken = null
+      authStorage.expires = null
+      authStorage.refreshToken = null
+      window.location.replace("/sign-in")
 
-      return Promise.reject(standarizedError);
+      return Promise.reject(standarizedError)
     }
   }
 
-  return Promise.reject(standarizedError);
-};
+  return Promise.reject(standarizedError)
+}

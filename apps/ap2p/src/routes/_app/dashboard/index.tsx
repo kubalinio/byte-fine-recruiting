@@ -1,6 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Home } from "../../../features/app/feature-dashboard/home";
+import { createFileRoute } from "@tanstack/react-router"
+
+import { Home } from "../../../features/app/feature-dashboard/home"
 
 export const Route = createFileRoute("/_app/dashboard/")({
-  component: () => <Home />,
-});
+  beforeLoad: () => {
+    document.title = "Dashboard - AP2P"
+  },
+  component: () => <Home />
+})

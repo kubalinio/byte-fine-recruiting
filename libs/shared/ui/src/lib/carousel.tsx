@@ -422,7 +422,7 @@
 //     <div
 //       ref={ref}
 //       className={cn(
-//         "absolute bottom-[30%] right-4 z-50 flex h-10 w-fit items-center justify-between gap-x-1 rounded-lg bg-gray-900/40",
+//         "absolute bottom-[30%] right-4 z-50 flex h-10 w-fit items-center justify-between gap-x-1 rounded-md bg-gray-900/40",
 //         className
 //       )}
 //       {...props}

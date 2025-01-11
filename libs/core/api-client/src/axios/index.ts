@@ -1,25 +1,27 @@
-import axios from "axios";
-import { requestSuccessInterceptor } from "../interceptors/requestInterceptors";
+import axios from "axios"
+
+import { requestSuccessInterceptor } from "../interceptors/requestInterceptors"
 import {
   responseFailureInterceptor,
-  responseSuccessInterceptor,
-} from "../interceptors/responseInterceptors";
+  responseSuccessInterceptor
+} from "../interceptors/responseInterceptors"
 
-export const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+export const BASE_URL = "http://localhost:8000"
 
-export const refreshTokenUrl = `${BASE_URL}/users/refresh-token`;
+export const refreshTokenUrl = `${BASE_URL}/users/refresh-token`
 
 const axiosClient = axios.create({
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
-  baseURL: BASE_URL,
-});
+  withCredentials: true,
+  baseURL: BASE_URL
+})
 
-axiosClient.interceptors.request.use(requestSuccessInterceptor);
+axiosClient.interceptors.request.use(requestSuccessInterceptor)
 axiosClient.interceptors.response.use(
   responseSuccessInterceptor,
   responseFailureInterceptor
-);
+)
 
-export default axiosClient;
+export default axiosClient

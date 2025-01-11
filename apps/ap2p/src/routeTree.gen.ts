@@ -8,158 +8,186 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as AuthImport } from "./routes/_auth";
-import { Route as AppImport } from "./routes/_app";
-import { Route as AuthIndexImport } from "./routes/_auth/index";
-import { Route as AuthSignInImport } from "./routes/_auth/sign-in";
-import { Route as AppUsersIndexImport } from "./routes/_app/users/index";
-import { Route as AppDashboardIndexImport } from "./routes/_app/dashboard/index";
-import { Route as AppAboutIndexImport } from "./routes/_app/about/index";
-import { Route as AppUsersIdIndexImport } from "./routes/_app/users/$id/index";
+import { Route as rootRoute } from './routes/__root'
+import { Route as AuthImport } from './routes/_auth'
+import { Route as AppImport } from './routes/_app'
+import { Route as IndexImport } from './routes/index'
+import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
+import { Route as AuthSignInImport } from './routes/_auth/sign-in'
+import { Route as AuthForgotPasswordImport } from './routes/_auth/forgot-password'
+import { Route as AppUsersIndexImport } from './routes/_app/users/index'
+import { Route as AppDashboardIndexImport } from './routes/_app/dashboard/index'
+import { Route as AppAboutIndexImport } from './routes/_app/about/index'
+import { Route as AppUsersIdIndexImport } from './routes/_app/users/$id/index'
 
 // Create Virtual Routes
 
-const AppHelpIndexLazyImport = createFileRoute("/_app/help/")();
+const AppHelpIndexLazyImport = createFileRoute('/_app/help/')()
 
 // Create/Update Routes
 
 const AuthRoute = AuthImport.update({
-  id: "/_auth",
+  id: '/_auth',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AppRoute = AppImport.update({
-  id: "/_app",
+  id: '/_app',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
-const AuthIndexRoute = AuthIndexImport.update({
-  id: "/",
-  path: "/",
+const IndexRoute = IndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignUpRoute = AuthSignUpImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
 
 const AuthSignInRoute = AuthSignInImport.update({
-  id: "/sign-in",
-  path: "/sign-in",
+  id: '/sign-in',
+  path: '/sign-in',
   getParentRoute: () => AuthRoute,
-} as any);
+} as any)
+
+const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 const AppHelpIndexLazyRoute = AppHelpIndexLazyImport.update({
-  id: "/help/",
-  path: "/help/",
+  id: '/help/',
+  path: '/help/',
   getParentRoute: () => AppRoute,
 } as any).lazy(() =>
-  import("./routes/_app/help/index.lazy").then((d) => d.Route)
-);
+  import('./routes/_app/help/index.lazy').then((d) => d.Route),
+)
 
 const AppUsersIndexRoute = AppUsersIndexImport.update({
-  id: "/users/",
-  path: "/users/",
+  id: '/users/',
+  path: '/users/',
   getParentRoute: () => AppRoute,
-} as any);
+} as any)
 
 const AppDashboardIndexRoute = AppDashboardIndexImport.update({
-  id: "/dashboard/",
-  path: "/dashboard/",
+  id: '/dashboard/',
+  path: '/dashboard/',
   getParentRoute: () => AppRoute,
-} as any);
+} as any)
 
 const AppAboutIndexRoute = AppAboutIndexImport.update({
-  id: "/about/",
-  path: "/about/",
+  id: '/about/',
+  path: '/about/',
   getParentRoute: () => AppRoute,
-} as any);
+} as any)
 
 const AppUsersIdIndexRoute = AppUsersIdIndexImport.update({
-  id: "/users/$id/",
-  path: "/users/$id/",
+  id: '/users/$id/',
+  path: '/users/$id/',
   getParentRoute: () => AppRoute,
-} as any);
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/_app": {
-      id: "/_app";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AppImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_auth": {
-      id: "/_auth";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AuthImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_auth/sign-in": {
-      id: "/_auth/sign-in";
-      path: "/sign-in";
-      fullPath: "/sign-in";
-      preLoaderRoute: typeof AuthSignInImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_auth/": {
-      id: "/_auth/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof AuthIndexImport;
-      parentRoute: typeof AuthImport;
-    };
-    "/_app/about/": {
-      id: "/_app/about/";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AppAboutIndexImport;
-      parentRoute: typeof AppImport;
-    };
-    "/_app/dashboard/": {
-      id: "/_app/dashboard/";
-      path: "/dashboard";
-      fullPath: "/dashboard";
-      preLoaderRoute: typeof AppDashboardIndexImport;
-      parentRoute: typeof AppImport;
-    };
-    "/_app/users/": {
-      id: "/_app/users/";
-      path: "/users";
-      fullPath: "/users";
-      preLoaderRoute: typeof AppUsersIndexImport;
-      parentRoute: typeof AppImport;
-    };
-    "/_app/help/": {
-      id: "/_app/help/";
-      path: "/help";
-      fullPath: "/help";
-      preLoaderRoute: typeof AppHelpIndexLazyImport;
-      parentRoute: typeof AppImport;
-    };
-    "/_app/users/$id/": {
-      id: "/_app/users/$id/";
-      path: "/users/$id";
-      fullPath: "/users/$id";
-      preLoaderRoute: typeof AppUsersIdIndexImport;
-      parentRoute: typeof AppImport;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth/forgot-password': {
+      id: '/_auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/sign-in': {
+      id: '/_auth/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof AuthSignInImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/sign-up': {
+      id: '/_auth/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof AuthSignUpImport
+      parentRoute: typeof AuthImport
+    }
+    '/_app/about/': {
+      id: '/_app/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AppAboutIndexImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/dashboard/': {
+      id: '/_app/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardIndexImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/users/': {
+      id: '/_app/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AppUsersIndexImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/help/': {
+      id: '/_app/help/'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof AppHelpIndexLazyImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/users/$id/': {
+      id: '/_app/users/$id/'
+      path: '/users/$id'
+      fullPath: '/users/$id'
+      preLoaderRoute: typeof AppUsersIdIndexImport
+      parentRoute: typeof AppImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface AppRouteChildren {
-  AppAboutIndexRoute: typeof AppAboutIndexRoute;
-  AppDashboardIndexRoute: typeof AppDashboardIndexRoute;
-  AppUsersIndexRoute: typeof AppUsersIndexRoute;
-  AppHelpIndexLazyRoute: typeof AppHelpIndexLazyRoute;
-  AppUsersIdIndexRoute: typeof AppUsersIdIndexRoute;
+  AppAboutIndexRoute: typeof AppAboutIndexRoute
+  AppDashboardIndexRoute: typeof AppDashboardIndexRoute
+  AppUsersIndexRoute: typeof AppUsersIndexRoute
+  AppHelpIndexLazyRoute: typeof AppHelpIndexLazyRoute
+  AppUsersIdIndexRoute: typeof AppUsersIdIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -168,105 +196,121 @@ const AppRouteChildren: AppRouteChildren = {
   AppUsersIndexRoute: AppUsersIndexRoute,
   AppHelpIndexLazyRoute: AppHelpIndexLazyRoute,
   AppUsersIdIndexRoute: AppUsersIdIndexRoute,
-};
+}
 
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren);
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface AuthRouteChildren {
-  AuthSignInRoute: typeof AuthSignInRoute;
-  AuthIndexRoute: typeof AuthIndexRoute;
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthSignInRoute: typeof AuthSignInRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
-  AuthIndexRoute: AuthIndexRoute,
-};
+  AuthSignUpRoute: AuthSignUpRoute,
+}
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren);
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 export interface FileRoutesByFullPath {
-  "": typeof AuthRouteWithChildren;
-  "/sign-in": typeof AuthSignInRoute;
-  "/": typeof AuthIndexRoute;
-  "/about": typeof AppAboutIndexRoute;
-  "/dashboard": typeof AppDashboardIndexRoute;
-  "/users": typeof AppUsersIndexRoute;
-  "/help": typeof AppHelpIndexLazyRoute;
-  "/users/$id": typeof AppUsersIdIndexRoute;
+  '/': typeof IndexRoute
+  '': typeof AuthRouteWithChildren
+  '/forgot-password': typeof AuthForgotPasswordRoute
+  '/sign-in': typeof AuthSignInRoute
+  '/sign-up': typeof AuthSignUpRoute
+  '/about': typeof AppAboutIndexRoute
+  '/dashboard': typeof AppDashboardIndexRoute
+  '/users': typeof AppUsersIndexRoute
+  '/help': typeof AppHelpIndexLazyRoute
+  '/users/$id': typeof AppUsersIdIndexRoute
 }
 
 export interface FileRoutesByTo {
-  "": typeof AppRouteWithChildren;
-  "/sign-in": typeof AuthSignInRoute;
-  "/": typeof AuthIndexRoute;
-  "/about": typeof AppAboutIndexRoute;
-  "/dashboard": typeof AppDashboardIndexRoute;
-  "/users": typeof AppUsersIndexRoute;
-  "/help": typeof AppHelpIndexLazyRoute;
-  "/users/$id": typeof AppUsersIdIndexRoute;
+  '/': typeof IndexRoute
+  '': typeof AuthRouteWithChildren
+  '/forgot-password': typeof AuthForgotPasswordRoute
+  '/sign-in': typeof AuthSignInRoute
+  '/sign-up': typeof AuthSignUpRoute
+  '/about': typeof AppAboutIndexRoute
+  '/dashboard': typeof AppDashboardIndexRoute
+  '/users': typeof AppUsersIndexRoute
+  '/help': typeof AppHelpIndexLazyRoute
+  '/users/$id': typeof AppUsersIdIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/_app": typeof AppRouteWithChildren;
-  "/_auth": typeof AuthRouteWithChildren;
-  "/_auth/sign-in": typeof AuthSignInRoute;
-  "/_auth/": typeof AuthIndexRoute;
-  "/_app/about/": typeof AppAboutIndexRoute;
-  "/_app/dashboard/": typeof AppDashboardIndexRoute;
-  "/_app/users/": typeof AppUsersIndexRoute;
-  "/_app/help/": typeof AppHelpIndexLazyRoute;
-  "/_app/users/$id/": typeof AppUsersIdIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_auth': typeof AuthRouteWithChildren
+  '/_auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/_auth/sign-in': typeof AuthSignInRoute
+  '/_auth/sign-up': typeof AuthSignUpRoute
+  '/_app/about/': typeof AppAboutIndexRoute
+  '/_app/dashboard/': typeof AppDashboardIndexRoute
+  '/_app/users/': typeof AppUsersIndexRoute
+  '/_app/help/': typeof AppHelpIndexLazyRoute
+  '/_app/users/$id/': typeof AppUsersIdIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | ""
-    | "/sign-in"
-    | "/"
-    | "/about"
-    | "/dashboard"
-    | "/users"
-    | "/help"
-    | "/users/$id";
-  fileRoutesByTo: FileRoutesByTo;
+    | '/'
+    | ''
+    | '/forgot-password'
+    | '/sign-in'
+    | '/sign-up'
+    | '/about'
+    | '/dashboard'
+    | '/users'
+    | '/help'
+    | '/users/$id'
+  fileRoutesByTo: FileRoutesByTo
   to:
-    | ""
-    | "/sign-in"
-    | "/"
-    | "/about"
-    | "/dashboard"
-    | "/users"
-    | "/help"
-    | "/users/$id";
+    | '/'
+    | ''
+    | '/forgot-password'
+    | '/sign-in'
+    | '/sign-up'
+    | '/about'
+    | '/dashboard'
+    | '/users'
+    | '/help'
+    | '/users/$id'
   id:
-    | "__root__"
-    | "/_app"
-    | "/_auth"
-    | "/_auth/sign-in"
-    | "/_auth/"
-    | "/_app/about/"
-    | "/_app/dashboard/"
-    | "/_app/users/"
-    | "/_app/help/"
-    | "/_app/users/$id/";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_auth'
+    | '/_auth/forgot-password'
+    | '/_auth/sign-in'
+    | '/_auth/sign-up'
+    | '/_app/about/'
+    | '/_app/dashboard/'
+    | '/_app/users/'
+    | '/_app/help/'
+    | '/_app/users/$id/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AppRoute: typeof AppRouteWithChildren;
-  AuthRoute: typeof AuthRouteWithChildren;
+  IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -274,9 +318,13 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/_app",
         "/_auth"
       ]
+    },
+    "/": {
+      "filePath": "index.tsx"
     },
     "/_app": {
       "filePath": "_app.tsx",
@@ -291,16 +339,21 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
+        "/_auth/forgot-password",
         "/_auth/sign-in",
-        "/_auth/"
+        "/_auth/sign-up"
       ]
+    },
+    "/_auth/forgot-password": {
+      "filePath": "_auth/forgot-password.tsx",
+      "parent": "/_auth"
     },
     "/_auth/sign-in": {
       "filePath": "_auth/sign-in.tsx",
       "parent": "/_auth"
     },
-    "/_auth/": {
-      "filePath": "_auth/index.tsx",
+    "/_auth/sign-up": {
+      "filePath": "_auth/sign-up.tsx",
       "parent": "/_auth"
     },
     "/_app/about/": {

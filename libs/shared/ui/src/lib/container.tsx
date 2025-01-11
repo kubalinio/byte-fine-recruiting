@@ -1,10 +1,9 @@
-import * as React from "react";
+import * as React from "react"
 
-import type { VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority"
 
-import { cva } from "class-variance-authority";
-
-import { cn } from "@ap2p/utils";
+import { cn } from "@ap2p/utils"
+import { cva } from "class-variance-authority"
 
 const containerVariants = cva("mx-auto", {
   variants: {
@@ -15,19 +14,19 @@ const containerVariants = cva("mx-auto", {
       narrowConstrainedPadded: "max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8",
       withoutStyle: "px-0 sm:px-0 lg:px-0",
       breakpointPadded: "container mx-auto px-4 sm:px-6 lg:px-10 lg:pt-6",
-      default: "rounded-2xl bg-white px-6 py-20 shadow-zCard",
-    },
+      default: "rounded-md bg-white px-6 py-20 shadow-zCard"
+    }
   },
   defaultVariants: {
-    variant: "breakpointPadded",
-  },
-});
+    variant: "breakpointPadded"
+  }
+})
 
 export interface ContainerProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof containerVariants> {
-  asChild?: boolean;
-  as?: React.ElementType;
+  asChild?: boolean
+  as?: React.ElementType
 }
 
 const Container: React.FC<ContainerProps> = ({
@@ -38,19 +37,19 @@ const Container: React.FC<ContainerProps> = ({
   variant,
   ...props
 }) => {
-  const Comp = asChild ? React.Fragment : as ? as : "div";
+  const Comp = asChild ? React.Fragment : as ? as : "div"
 
-  const containerClasses = cn(containerVariants({ variant }), className);
+  const containerClasses = cn(containerVariants({ variant }), className)
 
   return (
     <Comp className={containerClasses} {...props}>
       {variant === "narrowConstrainedPadded" ? (
-        <div className="mx-auto max-w-3xl">{children}</div>
+        <div className='mx-auto max-w-3xl'>{children}</div>
       ) : (
         children
       )}
     </Comp>
-  );
-};
+  )
+}
 
-export { Container, containerVariants };
+export { Container, containerVariants }

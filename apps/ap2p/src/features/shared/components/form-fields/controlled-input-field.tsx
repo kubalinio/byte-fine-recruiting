@@ -1,10 +1,8 @@
-"use client";
+"use client"
 
-import React from "react";
+import React from "react"
 
-import type { FieldValues, Path } from "react-hook-form";
-
-import { useFormContext } from "react-hook-form";
+import type { FieldValues, Path } from "react-hook-form"
 
 import {
   FormControl,
@@ -13,23 +11,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "@ap2p/ui";
-import { cn } from "@ap2p/utils";
+  Input
+} from "@ap2p/ui"
+import { cn } from "@ap2p/utils"
+import { useLocale } from "hooks/index"
+import { TranslateFn } from "i18n/messages"
+import { useFormContext } from "react-hook-form"
 
 type NInputFieldProps = {
-  className?: string;
-  label?: string;
-  placeholder?: string;
-  description?: string;
-  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
-  showError?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  className?: string
+  label?: string
+  placeholder?: string
+  description?: string
+  type?: React.InputHTMLAttributes<HTMLInputElement>["type"]
+  showError?: boolean
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 type InputControllerType<T extends FieldValues> = {
-  name: Path<T>;
-  requiredStar?: boolean;
-};
+  name: Path<T>
+  requiredStar?: boolean
+}
 
 interface ControlledInputProps<T extends FieldValues>
   extends Omit<NInputFieldProps, "name">,
@@ -46,7 +47,8 @@ const ControlledInputField = <T extends FieldValues>({
   requiredStar = false,
   ...props
 }: ControlledInputProps<T>) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
+  const { formatMessage } = useLocale()
 
   return (
     <FormField
@@ -57,13 +59,12 @@ const ControlledInputField = <T extends FieldValues>({
           {label && (
             <FormLabel>
               {label}{" "}
-              {requiredStar && <span className="text-error-600 -ml-px">*</span>}
+              {requiredStar && <span className='text-error-600 -ml-px'>*</span>}
             </FormLabel>
           )}
 
           <FormControl>
             <Input
-              className="h-11"
               placeholder={placeholder}
               type={type ? type : "text"}
               {...props}
@@ -74,12 +75,12 @@ const ControlledInputField = <T extends FieldValues>({
 
           {description && <FormDescription>{description}</FormDescription>}
 
-          {showError && <FormMessage />}
+          {showError && <FormMessage t={formatMessage} />}
         </FormItem>
       )}
     />
-  );
-};
+  )
+}
 
 const ControlledNumberInputField = <T extends FieldValues>({
   name,
@@ -91,7 +92,7 @@ const ControlledNumberInputField = <T extends FieldValues>({
   showError = true,
   ...props
 }: ControlledInputProps<T>) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <FormField
@@ -101,12 +102,12 @@ const ControlledNumberInputField = <T extends FieldValues>({
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           if (e.target.value) {
             if (/^\d*$/.test(e.target.value)) {
-              field.onChange(e.target.value);
+              field.onChange(e.target.value)
             }
           } else if (e.target.value === "") {
-            field.onChange("");
+            field.onChange("")
           }
-        };
+        }
 
         return (
           <FormItem className={cn("w-full space-y-1.5", className)}>
@@ -114,9 +115,9 @@ const ControlledNumberInputField = <T extends FieldValues>({
 
             <FormControl>
               <Input
-                className="h-11"
+                className='h-11'
                 maxLength={32}
-                inputMode="numeric"
+                inputMode='numeric'
                 placeholder={placeholder}
                 type={type ? type : "text"}
                 {...field}
@@ -130,11 +131,11 @@ const ControlledNumberInputField = <T extends FieldValues>({
 
             {showError && <FormMessage />}
           </FormItem>
-        );
+        )
       }}
     />
-  );
-};
+  )
+}
 
 const ControlledPostalCodeInputField = <T extends FieldValues>({
   name,
@@ -146,7 +147,7 @@ const ControlledPostalCodeInputField = <T extends FieldValues>({
   showError = true,
   ...props
 }: ControlledInputProps<T>) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <FormField
@@ -154,24 +155,24 @@ const ControlledPostalCodeInputField = <T extends FieldValues>({
       control={control}
       render={({ field }) => {
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-          const { value } = e.target;
+          const { value } = e.target
 
           if (value === "") {
-            field.onChange("");
-            return;
+            field.onChange("")
+            return
           }
 
-          if (!/^\d{0,2}-?\d{0,3}$/.test(value) || value === "-") return;
+          if (!/^\d{0,2}-?\d{0,3}$/.test(value) || value === "-") return
 
           const newValue =
             value.length === 3 && !value.includes("-")
               ? `${value.substring(0, 2)}-${value.substring(2)}`
               : value.length === 3 && value.charAt(2) === "-"
-              ? value.slice(0, 2)
-              : value;
+                ? value.slice(0, 2)
+                : value
 
-          field.onChange(newValue);
-        };
+          field.onChange(newValue)
+        }
 
         return (
           <FormItem className={cn("w-full space-y-1.5", className)}>
@@ -179,10 +180,10 @@ const ControlledPostalCodeInputField = <T extends FieldValues>({
 
             <FormControl>
               <Input
-                className="h-11"
+                className='h-11'
                 maxLength={8}
                 {...props}
-                inputMode="numeric"
+                inputMode='numeric'
                 placeholder={placeholder}
                 type={type ? type : "text"}
                 {...field}
@@ -195,14 +196,14 @@ const ControlledPostalCodeInputField = <T extends FieldValues>({
 
             {showError && <FormMessage />}
           </FormItem>
-        );
+        )
       }}
     />
-  );
-};
+  )
+}
 
 export {
   ControlledInputField,
   ControlledNumberInputField,
-  ControlledPostalCodeInputField,
-};
+  ControlledPostalCodeInputField
+}

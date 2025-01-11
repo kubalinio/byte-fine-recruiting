@@ -1,18 +1,18 @@
-import { Fragment } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { Fragment } from "react"
 
-import { useAuth } from "@ap2p/auth";
+import { useAuth } from "@ap2p/auth"
+import { Button } from "@ap2p/ui"
+import { useNavigate } from "@tanstack/react-router"
+import { AppLocale } from "context/locale/AppLocale.enum"
+import { useLocale } from "hooks/useLocale/useLocale"
+import { useUsers } from "hooks/useUsers/useUsers"
 
-import { AppLocale } from "../../../context/locale/AppLocale.enum";
-import { useLocale } from "../../../hooks/useLocale/useLocale";
-import { useUsers } from "../../../hooks/useUsers/useUsers";
-import { Translation } from "../../../ui/translation/Translation";
-import { LocationInfo } from "../../../ui/locationInfo/LocationInfo";
-import { Button } from "@ap2p/ui";
+import { LocationInfo } from "../../../ui/locationInfo/LocationInfo"
+import { Translation } from "../../../ui/translation/Translation"
 
 export const Home = () => {
-  const { locale, setLocale } = useLocale();
-  const { user, login, logout, isAuthenticated, isAuthenticating } = useAuth();
+  const { locale, setLocale } = useLocale()
+  const { user, login, logout, isAuthenticated, isAuthenticating } = useAuth()
 
   const {
     data: usersResponse,
@@ -20,23 +20,23 @@ export const Home = () => {
     isFetched: areUsersFetched,
     hasNextPage: hasMoreUsers,
     fetchNextPage: loadMoreUsers,
-    isFetchingNextPage,
-  } = useUsers();
+    isFetchingNextPage
+  } = useUsers()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <>
       <h2>Home</h2>
       <p>
-        <Translation id="home.helloWorld" />
+        <Translation id='home.helloWorld' />
         <span style={{ margin: "0 1rem" }}>&#x2190;</span>
         <span>
           This text is translated using <strong>Translation</strong> component.
         </span>
         <span>Click </span>
         <Button
-          className=""
+          className=''
           onClick={() =>
             setLocale(locale === AppLocale.pl ? AppLocale.en : AppLocale.pl)
           }
@@ -90,8 +90,8 @@ export const Home = () => {
                         onClick={() => {
                           navigate({
                             to: "/users/$id",
-                            params: { id: user.id },
-                          });
+                            params: { id: user.id }
+                          })
                         }}
                       >
                         User {user.id}
@@ -111,5 +111,5 @@ export const Home = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

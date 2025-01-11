@@ -1,25 +1,25 @@
-import * as React from "react";
+import * as React from "react"
 
-import { cn } from "@ap2p/utils";
+import { cn } from "@ap2p/utils"
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <input
         className={cn(
-          "border-input focus-visible:ring-ring aria-[invalid=true]:border-error flex h-14 w-full rounded-lg border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:border-opacity-25",
+          "flex h-[2.875rem] w-full rounded-md border border-input bg-white px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:border-opacity-25 aria-[invalid=true]:border-error",
           className
         )}
         ref={ref}
         type={type}
-        autoComplete="on"
+        autoComplete='on'
         {...props}
       />
-    );
+    )
   }
-);
-Input.displayName = "Input";
+)
+Input.displayName = "Input"
 
-export { Input };
+export { Input }
