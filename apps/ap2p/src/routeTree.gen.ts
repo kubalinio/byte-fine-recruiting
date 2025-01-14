@@ -15,18 +15,22 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AppImport } from './routes/_app'
-import { Route as IndexImport } from './routes/index'
+import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
 import { Route as AuthSignInImport } from './routes/_auth/sign-in'
 import { Route as AuthForgotPasswordImport } from './routes/_auth/forgot-password'
-import { Route as AppUsersIndexImport } from './routes/_app/users/index'
-import { Route as AppDashboardIndexImport } from './routes/_app/dashboard/index'
-import { Route as AppAboutIndexImport } from './routes/_app/about/index'
-import { Route as AppUsersIdIndexImport } from './routes/_app/users/$id/index'
+import { Route as AppDocsLayoutDocsImport } from './routes/_app/docs/_layout-docs'
+import { Route as AppDocsLayoutDocsUsersIndexImport } from './routes/_app/docs/_layout-docs/users/index'
+import { Route as AppDocsLayoutDocsIntroductionIndexImport } from './routes/_app/docs/_layout-docs/introduction/index'
+import { Route as AppDocsLayoutDocsAboutIndexImport } from './routes/_app/docs/_layout-docs/about/index'
+import { Route as AppDocsLayoutDocsUsersIdIndexImport } from './routes/_app/docs/_layout-docs/users/$id/index'
 
 // Create Virtual Routes
 
-const AppHelpIndexLazyImport = createFileRoute('/_app/help/')()
+const AppDocsImport = createFileRoute('/_app/docs')()
+const AppDocsLayoutDocsHelpIndexLazyImport = createFileRoute(
+  '/_app/docs/_layout-docs/help/',
+)()
 
 // Create/Update Routes
 
@@ -40,10 +44,16 @@ const AppRoute = AppImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const AppDocsRoute = AppDocsImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppIndexRoute = AppIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => AppRoute,
 } as any)
 
 const AuthSignUpRoute = AuthSignUpImport.update({
@@ -64,49 +74,54 @@ const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AppHelpIndexLazyRoute = AppHelpIndexLazyImport.update({
-  id: '/help/',
-  path: '/help/',
-  getParentRoute: () => AppRoute,
-} as any).lazy(() =>
-  import('./routes/_app/help/index.lazy').then((d) => d.Route),
-)
-
-const AppUsersIndexRoute = AppUsersIndexImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => AppRoute,
+const AppDocsLayoutDocsRoute = AppDocsLayoutDocsImport.update({
+  id: '/_layout-docs',
+  getParentRoute: () => AppDocsRoute,
 } as any)
 
-const AppDashboardIndexRoute = AppDashboardIndexImport.update({
-  id: '/dashboard/',
-  path: '/dashboard/',
-  getParentRoute: () => AppRoute,
-} as any)
+const AppDocsLayoutDocsHelpIndexLazyRoute =
+  AppDocsLayoutDocsHelpIndexLazyImport.update({
+    id: '/help/',
+    path: '/help/',
+    getParentRoute: () => AppDocsLayoutDocsRoute,
+  } as any).lazy(() =>
+    import('./routes/_app/docs/_layout-docs/help/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
-const AppAboutIndexRoute = AppAboutIndexImport.update({
-  id: '/about/',
-  path: '/about/',
-  getParentRoute: () => AppRoute,
-} as any)
+const AppDocsLayoutDocsUsersIndexRoute =
+  AppDocsLayoutDocsUsersIndexImport.update({
+    id: '/users/',
+    path: '/users/',
+    getParentRoute: () => AppDocsLayoutDocsRoute,
+  } as any)
 
-const AppUsersIdIndexRoute = AppUsersIdIndexImport.update({
-  id: '/users/$id/',
-  path: '/users/$id/',
-  getParentRoute: () => AppRoute,
-} as any)
+const AppDocsLayoutDocsIntroductionIndexRoute =
+  AppDocsLayoutDocsIntroductionIndexImport.update({
+    id: '/introduction/',
+    path: '/introduction/',
+    getParentRoute: () => AppDocsLayoutDocsRoute,
+  } as any)
+
+const AppDocsLayoutDocsAboutIndexRoute =
+  AppDocsLayoutDocsAboutIndexImport.update({
+    id: '/about/',
+    path: '/about/',
+    getParentRoute: () => AppDocsLayoutDocsRoute,
+  } as any)
+
+const AppDocsLayoutDocsUsersIdIndexRoute =
+  AppDocsLayoutDocsUsersIdIndexImport.update({
+    id: '/users/$id/',
+    path: '/users/$id/',
+    getParentRoute: () => AppDocsLayoutDocsRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -142,60 +157,106 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignUpImport
       parentRoute: typeof AuthImport
     }
-    '/_app/about/': {
-      id: '/_app/about/'
+    '/_app/': {
+      id: '/_app/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppIndexImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/docs': {
+      id: '/_app/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof AppDocsImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/docs/_layout-docs': {
+      id: '/_app/docs/_layout-docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof AppDocsLayoutDocsImport
+      parentRoute: typeof AppDocsRoute
+    }
+    '/_app/docs/_layout-docs/about/': {
+      id: '/_app/docs/_layout-docs/about/'
       path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AppAboutIndexImport
-      parentRoute: typeof AppImport
+      fullPath: '/docs/about'
+      preLoaderRoute: typeof AppDocsLayoutDocsAboutIndexImport
+      parentRoute: typeof AppDocsLayoutDocsImport
     }
-    '/_app/dashboard/': {
-      id: '/_app/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AppDashboardIndexImport
-      parentRoute: typeof AppImport
+    '/_app/docs/_layout-docs/introduction/': {
+      id: '/_app/docs/_layout-docs/introduction/'
+      path: '/introduction'
+      fullPath: '/docs/introduction'
+      preLoaderRoute: typeof AppDocsLayoutDocsIntroductionIndexImport
+      parentRoute: typeof AppDocsLayoutDocsImport
     }
-    '/_app/users/': {
-      id: '/_app/users/'
+    '/_app/docs/_layout-docs/users/': {
+      id: '/_app/docs/_layout-docs/users/'
       path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AppUsersIndexImport
-      parentRoute: typeof AppImport
+      fullPath: '/docs/users'
+      preLoaderRoute: typeof AppDocsLayoutDocsUsersIndexImport
+      parentRoute: typeof AppDocsLayoutDocsImport
     }
-    '/_app/help/': {
-      id: '/_app/help/'
+    '/_app/docs/_layout-docs/help/': {
+      id: '/_app/docs/_layout-docs/help/'
       path: '/help'
-      fullPath: '/help'
-      preLoaderRoute: typeof AppHelpIndexLazyImport
-      parentRoute: typeof AppImport
+      fullPath: '/docs/help'
+      preLoaderRoute: typeof AppDocsLayoutDocsHelpIndexLazyImport
+      parentRoute: typeof AppDocsLayoutDocsImport
     }
-    '/_app/users/$id/': {
-      id: '/_app/users/$id/'
+    '/_app/docs/_layout-docs/users/$id/': {
+      id: '/_app/docs/_layout-docs/users/$id/'
       path: '/users/$id'
-      fullPath: '/users/$id'
-      preLoaderRoute: typeof AppUsersIdIndexImport
-      parentRoute: typeof AppImport
+      fullPath: '/docs/users/$id'
+      preLoaderRoute: typeof AppDocsLayoutDocsUsersIdIndexImport
+      parentRoute: typeof AppDocsLayoutDocsImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AppDocsLayoutDocsRouteChildren {
+  AppDocsLayoutDocsAboutIndexRoute: typeof AppDocsLayoutDocsAboutIndexRoute
+  AppDocsLayoutDocsIntroductionIndexRoute: typeof AppDocsLayoutDocsIntroductionIndexRoute
+  AppDocsLayoutDocsUsersIndexRoute: typeof AppDocsLayoutDocsUsersIndexRoute
+  AppDocsLayoutDocsHelpIndexLazyRoute: typeof AppDocsLayoutDocsHelpIndexLazyRoute
+  AppDocsLayoutDocsUsersIdIndexRoute: typeof AppDocsLayoutDocsUsersIdIndexRoute
+}
+
+const AppDocsLayoutDocsRouteChildren: AppDocsLayoutDocsRouteChildren = {
+  AppDocsLayoutDocsAboutIndexRoute: AppDocsLayoutDocsAboutIndexRoute,
+  AppDocsLayoutDocsIntroductionIndexRoute:
+    AppDocsLayoutDocsIntroductionIndexRoute,
+  AppDocsLayoutDocsUsersIndexRoute: AppDocsLayoutDocsUsersIndexRoute,
+  AppDocsLayoutDocsHelpIndexLazyRoute: AppDocsLayoutDocsHelpIndexLazyRoute,
+  AppDocsLayoutDocsUsersIdIndexRoute: AppDocsLayoutDocsUsersIdIndexRoute,
+}
+
+const AppDocsLayoutDocsRouteWithChildren =
+  AppDocsLayoutDocsRoute._addFileChildren(AppDocsLayoutDocsRouteChildren)
+
+interface AppDocsRouteChildren {
+  AppDocsLayoutDocsRoute: typeof AppDocsLayoutDocsRouteWithChildren
+}
+
+const AppDocsRouteChildren: AppDocsRouteChildren = {
+  AppDocsLayoutDocsRoute: AppDocsLayoutDocsRouteWithChildren,
+}
+
+const AppDocsRouteWithChildren =
+  AppDocsRoute._addFileChildren(AppDocsRouteChildren)
+
 interface AppRouteChildren {
-  AppAboutIndexRoute: typeof AppAboutIndexRoute
-  AppDashboardIndexRoute: typeof AppDashboardIndexRoute
-  AppUsersIndexRoute: typeof AppUsersIndexRoute
-  AppHelpIndexLazyRoute: typeof AppHelpIndexLazyRoute
-  AppUsersIdIndexRoute: typeof AppUsersIdIndexRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppDocsRoute: typeof AppDocsRouteWithChildren
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppAboutIndexRoute: AppAboutIndexRoute,
-  AppDashboardIndexRoute: AppDashboardIndexRoute,
-  AppUsersIndexRoute: AppUsersIndexRoute,
-  AppHelpIndexLazyRoute: AppHelpIndexLazyRoute,
-  AppUsersIdIndexRoute: AppUsersIdIndexRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppDocsRoute: AppDocsRouteWithChildren,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -215,95 +276,101 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '': typeof AuthRouteWithChildren
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/about': typeof AppAboutIndexRoute
-  '/dashboard': typeof AppDashboardIndexRoute
-  '/users': typeof AppUsersIndexRoute
-  '/help': typeof AppHelpIndexLazyRoute
-  '/users/$id': typeof AppUsersIdIndexRoute
+  '/': typeof AppIndexRoute
+  '/docs': typeof AppDocsLayoutDocsRouteWithChildren
+  '/docs/about': typeof AppDocsLayoutDocsAboutIndexRoute
+  '/docs/introduction': typeof AppDocsLayoutDocsIntroductionIndexRoute
+  '/docs/users': typeof AppDocsLayoutDocsUsersIndexRoute
+  '/docs/help': typeof AppDocsLayoutDocsHelpIndexLazyRoute
+  '/docs/users/$id': typeof AppDocsLayoutDocsUsersIdIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '': typeof AuthRouteWithChildren
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/about': typeof AppAboutIndexRoute
-  '/dashboard': typeof AppDashboardIndexRoute
-  '/users': typeof AppUsersIndexRoute
-  '/help': typeof AppHelpIndexLazyRoute
-  '/users/$id': typeof AppUsersIdIndexRoute
+  '/': typeof AppIndexRoute
+  '/docs': typeof AppDocsLayoutDocsRouteWithChildren
+  '/docs/about': typeof AppDocsLayoutDocsAboutIndexRoute
+  '/docs/introduction': typeof AppDocsLayoutDocsIntroductionIndexRoute
+  '/docs/users': typeof AppDocsLayoutDocsUsersIndexRoute
+  '/docs/help': typeof AppDocsLayoutDocsHelpIndexLazyRoute
+  '/docs/users/$id': typeof AppDocsLayoutDocsUsersIdIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
-  '/_app/about/': typeof AppAboutIndexRoute
-  '/_app/dashboard/': typeof AppDashboardIndexRoute
-  '/_app/users/': typeof AppUsersIndexRoute
-  '/_app/help/': typeof AppHelpIndexLazyRoute
-  '/_app/users/$id/': typeof AppUsersIdIndexRoute
+  '/_app/': typeof AppIndexRoute
+  '/_app/docs': typeof AppDocsRouteWithChildren
+  '/_app/docs/_layout-docs': typeof AppDocsLayoutDocsRouteWithChildren
+  '/_app/docs/_layout-docs/about/': typeof AppDocsLayoutDocsAboutIndexRoute
+  '/_app/docs/_layout-docs/introduction/': typeof AppDocsLayoutDocsIntroductionIndexRoute
+  '/_app/docs/_layout-docs/users/': typeof AppDocsLayoutDocsUsersIndexRoute
+  '/_app/docs/_layout-docs/help/': typeof AppDocsLayoutDocsHelpIndexLazyRoute
+  '/_app/docs/_layout-docs/users/$id/': typeof AppDocsLayoutDocsUsersIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | ''
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
-    | '/about'
-    | '/dashboard'
-    | '/users'
-    | '/help'
-    | '/users/$id'
+    | '/'
+    | '/docs'
+    | '/docs/about'
+    | '/docs/introduction'
+    | '/docs/users'
+    | '/docs/help'
+    | '/docs/users/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | ''
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
-    | '/about'
-    | '/dashboard'
-    | '/users'
-    | '/help'
-    | '/users/$id'
+    | '/'
+    | '/docs'
+    | '/docs/about'
+    | '/docs/introduction'
+    | '/docs/users'
+    | '/docs/help'
+    | '/docs/users/$id'
   id:
     | '__root__'
-    | '/'
     | '/_app'
     | '/_auth'
     | '/_auth/forgot-password'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
-    | '/_app/about/'
-    | '/_app/dashboard/'
-    | '/_app/users/'
-    | '/_app/help/'
-    | '/_app/users/$id/'
+    | '/_app/'
+    | '/_app/docs'
+    | '/_app/docs/_layout-docs'
+    | '/_app/docs/_layout-docs/about/'
+    | '/_app/docs/_layout-docs/introduction/'
+    | '/_app/docs/_layout-docs/users/'
+    | '/_app/docs/_layout-docs/help/'
+    | '/_app/docs/_layout-docs/users/$id/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
 }
@@ -318,22 +385,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
         "/_app",
         "/_auth"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
     "/_app": {
       "filePath": "_app.tsx",
       "children": [
-        "/_app/about/",
-        "/_app/dashboard/",
-        "/_app/users/",
-        "/_app/help/",
-        "/_app/users/$id/"
+        "/_app/",
+        "/_app/docs"
       ]
     },
     "/_auth": {
@@ -356,25 +416,47 @@ export const routeTree = rootRoute
       "filePath": "_auth/sign-up.tsx",
       "parent": "/_auth"
     },
-    "/_app/about/": {
-      "filePath": "_app/about/index.tsx",
+    "/_app/": {
+      "filePath": "_app/index.tsx",
       "parent": "/_app"
     },
-    "/_app/dashboard/": {
-      "filePath": "_app/dashboard/index.tsx",
-      "parent": "/_app"
+    "/_app/docs": {
+      "filePath": "_app/docs",
+      "parent": "/_app",
+      "children": [
+        "/_app/docs/_layout-docs"
+      ]
     },
-    "/_app/users/": {
-      "filePath": "_app/users/index.tsx",
-      "parent": "/_app"
+    "/_app/docs/_layout-docs": {
+      "filePath": "_app/docs/_layout-docs.tsx",
+      "parent": "/_app/docs",
+      "children": [
+        "/_app/docs/_layout-docs/about/",
+        "/_app/docs/_layout-docs/introduction/",
+        "/_app/docs/_layout-docs/users/",
+        "/_app/docs/_layout-docs/help/",
+        "/_app/docs/_layout-docs/users/$id/"
+      ]
     },
-    "/_app/help/": {
-      "filePath": "_app/help/index.lazy.tsx",
-      "parent": "/_app"
+    "/_app/docs/_layout-docs/about/": {
+      "filePath": "_app/docs/_layout-docs/about/index.tsx",
+      "parent": "/_app/docs/_layout-docs"
     },
-    "/_app/users/$id/": {
-      "filePath": "_app/users/$id/index.tsx",
-      "parent": "/_app"
+    "/_app/docs/_layout-docs/introduction/": {
+      "filePath": "_app/docs/_layout-docs/introduction/index.tsx",
+      "parent": "/_app/docs/_layout-docs"
+    },
+    "/_app/docs/_layout-docs/users/": {
+      "filePath": "_app/docs/_layout-docs/users/index.tsx",
+      "parent": "/_app/docs/_layout-docs"
+    },
+    "/_app/docs/_layout-docs/help/": {
+      "filePath": "_app/docs/_layout-docs/help/index.lazy.tsx",
+      "parent": "/_app/docs/_layout-docs"
+    },
+    "/_app/docs/_layout-docs/users/$id/": {
+      "filePath": "_app/docs/_layout-docs/users/$id/index.tsx",
+      "parent": "/_app/docs/_layout-docs"
     }
   }
 }

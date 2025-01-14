@@ -1,14 +1,29 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Layout } from "../features/app/layouts/layout/layout";
+import { SidebarInset, SidebarProvider } from "@ap2p/ui"
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
+import { AppHeader } from "features/app/layouts/app-header"
+import { AppSidebar } from "features/app/layouts/app-sidebar"
 
 export const Route = createFileRoute("/_app")({
   beforeLoad: ({ context }) => {
-    if (!context.auth.isAuthenticated) {
+    if (!context.auth.accessToken) {
       throw redirect({
-        to: "/sign-in",
-        replace: true,
-      });
+        to: "/sign-in"
+      })
     }
   },
-  component: () => <Layout />,
-});
+  component: () => <AppLayout />
+})
+
+const AppLayout = () => {
+  return (
+    <SidebarProvider defaultOpen={false}>
+      <AppSidebar />
+
+      <SidebarInset>
+        <AppHeader />
+
+        <Outlet />
+      </SidebarInset>
+    </SidebarProvider>
+  )
+}

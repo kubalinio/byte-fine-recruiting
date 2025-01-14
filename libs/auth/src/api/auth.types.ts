@@ -16,7 +16,8 @@ export type SignInMutationResponse = {
 export type GetMeQueryResponse = {
   first_name: string
   last_name: string
-  username: string
+  email: string
+  avatar?: string | null
 }
 
 export type User = {

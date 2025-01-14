@@ -22,8 +22,7 @@ const SignIn = () => {
   useEffect(() => {
     if (isAuthenticated) {
       navigate({
-        to: "/dashboard",
-        replace: true
+        to: "/"
       })
     }
   }, [isAuthenticated])

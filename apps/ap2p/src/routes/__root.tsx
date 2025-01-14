@@ -1,15 +1,18 @@
+import * as React from "react"
+
+import type { AuthContextValue } from "@ap2p/auth"
+
 import {
   createRootRouteWithContext,
   Outlet,
-  ScrollRestoration,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import type { AuthContextValue } from "@ap2p/auth";
+  ScrollRestoration
+} from "@tanstack/react-router"
+import { TanStackRouterDevtools } from "@tanstack/router-devtools"
 
-const enableTanstackRouterDevtools = import.meta.env.DEV;
+const enableTanstackRouterDevtools = import.meta.env.DEV
 
 export interface MyRouterContext {
-  auth: AuthContextValue;
+  auth: AuthContextValue
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
@@ -17,7 +20,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <>
       <ScrollRestoration />
       <Outlet />
-      {enableTanstackRouterDevtools && <TanStackRouterDevtools />}
+      {enableTanstackRouterDevtools && (
+        <TanStackRouterDevtools position='top-left' />
+      )}
     </>
-  ),
-});
+  )
+})
