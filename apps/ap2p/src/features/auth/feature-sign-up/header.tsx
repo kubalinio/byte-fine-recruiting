@@ -1,6 +1,6 @@
 import { Container, Divider, Typography } from "@ap2p/ui"
 import { Logo } from "assets/images/logo"
-import { Link } from "features/shared/components/Link"
+import { Link } from "features/shared/components/link"
 
 const Header = () => {
   return (

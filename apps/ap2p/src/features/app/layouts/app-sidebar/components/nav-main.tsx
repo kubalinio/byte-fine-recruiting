@@ -15,7 +15,7 @@ import {
   SidebarMenuSubItem
 } from "@ap2p/ui"
 import { useNavigate } from "@tanstack/react-router"
-import { Link } from "features/shared/components/Link"
+import { Link } from "features/shared/components/link"
 import { ChevronRight } from "lucide-react"
 
 export function NavMain({
@@ -67,6 +67,7 @@ const Tree = ({
         if (!item.items) {
           return (
             <SidebarMenuButton
+              key={item.title}
               size='lg'
               tooltip={item.title}
               onClick={() => handleNavigate(item.url)}

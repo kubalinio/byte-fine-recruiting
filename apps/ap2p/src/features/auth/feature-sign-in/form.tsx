@@ -6,7 +6,7 @@ import {
   ControlledInputField,
   ControlledPasswordField
 } from "features/shared/components/form-fields"
-import { Link } from "features/shared/components/Link"
+import { Link } from "features/shared/components/link"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 type SignInFormProps = {

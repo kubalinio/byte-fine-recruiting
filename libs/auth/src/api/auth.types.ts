@@ -1,6 +1,11 @@
 import { z } from "zod"
 
-import { SignInFormSchema, SignUpFormSchema } from "./auth.validators"
+import {
+  ResetPasswordFormSchema,
+  SignInFormSchema,
+  SignUpFormSchema,
+  UpdateUserFormSchema
+} from "./auth.validators"
 
 export type SignUpFormSchemaType = z.infer<typeof SignUpFormSchema>
 export type SignUpMutationArgs = z.infer<typeof SignUpFormSchema>
@@ -13,10 +18,21 @@ export type SignInMutationResponse = {
   token_type: string
 }
 
+export type ResetPasswordFormTypes = z.infer<typeof ResetPasswordFormSchema>
+
+export type ResetPasswordMutationArgs = {
+  token: string
+  password: string
+}
+
+export type UpdateUserFormTypes = z.infer<typeof UpdateUserFormSchema>
+export type UpdateUserMutationArgs = UpdateUserFormTypes
+
 export type GetMeQueryResponse = {
-  first_name: string
-  last_name: string
+  first_name?: string
+  last_name?: string
   email: string
+  phone?: string
   avatar?: string | null
 }
 

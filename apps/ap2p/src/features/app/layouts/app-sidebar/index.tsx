@@ -73,7 +73,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             className='ml-px w-full group-data-[state=expanded]:w-12'
           />
 
-          <SidebarTrigger className='h-8 w-8' />
+          <SidebarTrigger className='h-8 w-8 data-[open=false]:bg-sidebar-accent/80' />
         </div>
       </SidebarHeader>
 

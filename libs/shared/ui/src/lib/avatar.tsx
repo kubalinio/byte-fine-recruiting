@@ -1,13 +1,12 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
-import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import { cn } from "@ap2p/utils"
+import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
-import { cn } from "@ap2p/utils";
-
-import { AddPhoto } from "../icons/add-photo";
-import { Typography } from "./typography";
+import { AddPhoto } from "../icons/add-photo"
+import { Typography } from "./typography"
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -21,8 +20,8 @@ const Avatar = React.forwardRef<
     )}
     {...props}
   />
-));
-Avatar.displayName = AvatarPrimitive.Root.displayName;
+))
+Avatar.displayName = AvatarPrimitive.Root.displayName
 
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
@@ -33,8 +32,8 @@ const AvatarImage = React.forwardRef<
     className={cn("size-full object-cover", className)}
     {...props}
   />
-));
-AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+))
+AvatarImage.displayName = AvatarPrimitive.Image.displayName
 
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
@@ -43,24 +42,24 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      "bg-muted flex size-full items-center justify-center rounded-full",
+      "flex size-full items-center justify-center rounded-full bg-primary",
       className
     )}
     {...props}
   />
-));
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+))
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
 const AvatarPlaceholder = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <div className="flex size-full flex-col items-center justify-center gap-y-1 overflow-hidden rounded-full bg-gray-200">
-      <AddPhoto className="text-gray-600" />
+    <div className='flex size-full flex-col items-center justify-center gap-y-1 overflow-hidden rounded-full bg-gray-200'>
+      <AddPhoto className='text-gray-600' />
 
-      <Typography variant="caption" as="span" className="text-gray-600">
+      <Typography variant='caption' as='span' className='text-gray-600'>
         {children ? children : "Add Photo"}
       </Typography>
     </div>
-  );
-};
+  )
+}
 
-export { Avatar, AvatarFallback, AvatarImage, AvatarPlaceholder };
+export { Avatar, AvatarFallback, AvatarImage, AvatarPlaceholder }

@@ -42,7 +42,7 @@ const SettingDropdown = () => {
       >
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link to='/'>
+            <Link to='/settings/profile'>
               <Bolt
                 size={16}
                 strokeWidth={2}
@@ -54,14 +54,14 @@ const SettingDropdown = () => {
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
-            <Link to='/'>
+            <Link to='/settings/subscriptions'>
               <Layers2
                 size={16}
                 strokeWidth={2}
                 className='opacity-60'
                 aria-hidden='true'
               />
-              <span>Subscription</span>
+              <span>Subscriptions</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

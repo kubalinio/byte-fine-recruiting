@@ -4,7 +4,7 @@ import { SignInFormTypes, useAuth } from "@ap2p/auth"
 import { Container, Typography } from "@ap2p/ui"
 import { useNavigate } from "@tanstack/react-router"
 import { BgPattern } from "assets/auth/bg-pattern"
-import { Link } from "features/shared/components/Link"
+import { Link } from "features/shared/components/link"
 import { SubmitHandler } from "react-hook-form"
 
 import { SignInForm } from "./form"

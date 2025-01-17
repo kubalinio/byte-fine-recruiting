@@ -7,7 +7,7 @@ import {
   ControlledPasswordField,
   ControlledPhoneField
 } from "features/shared/components/form-fields"
-import { Link } from "features/shared/components/Link"
+import { Link } from "features/shared/components/link"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import { FormCheckboxes } from "./form-checkboxes"

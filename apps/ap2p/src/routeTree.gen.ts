@@ -19,7 +19,11 @@ import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
 import { Route as AuthSignInImport } from './routes/_auth/sign-in'
 import { Route as AuthForgotPasswordImport } from './routes/_auth/forgot-password'
+import { Route as AppSettingsLayoutImport } from './routes/_app/settings/_layout'
 import { Route as AppDocsLayoutDocsImport } from './routes/_app/docs/_layout-docs'
+import { Route as AppSettingsLayoutIndexImport } from './routes/_app/settings/_layout.index'
+import { Route as AppSettingsLayoutSubscriptionsImport } from './routes/_app/settings/_layout.subscriptions'
+import { Route as AppSettingsLayoutProfileImport } from './routes/_app/settings/_layout.profile'
 import { Route as AppDocsLayoutDocsUsersIndexImport } from './routes/_app/docs/_layout-docs/users/index'
 import { Route as AppDocsLayoutDocsIntroductionIndexImport } from './routes/_app/docs/_layout-docs/introduction/index'
 import { Route as AppDocsLayoutDocsAboutIndexImport } from './routes/_app/docs/_layout-docs/about/index'
@@ -27,6 +31,7 @@ import { Route as AppDocsLayoutDocsUsersIdIndexImport } from './routes/_app/docs
 
 // Create Virtual Routes
 
+const AppSettingsImport = createFileRoute('/_app/settings')()
 const AppDocsImport = createFileRoute('/_app/docs')()
 const AppDocsLayoutDocsHelpIndexLazyImport = createFileRoute(
   '/_app/docs/_layout-docs/help/',
@@ -42,6 +47,12 @@ const AuthRoute = AuthImport.update({
 const AppRoute = AppImport.update({
   id: '/_app',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AppSettingsRoute = AppSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
 } as any)
 
 const AppDocsRoute = AppDocsImport.update({
@@ -74,9 +85,33 @@ const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
+const AppSettingsLayoutRoute = AppSettingsLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => AppSettingsRoute,
+} as any)
+
 const AppDocsLayoutDocsRoute = AppDocsLayoutDocsImport.update({
   id: '/_layout-docs',
   getParentRoute: () => AppDocsRoute,
+} as any)
+
+const AppSettingsLayoutIndexRoute = AppSettingsLayoutIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppSettingsLayoutRoute,
+} as any)
+
+const AppSettingsLayoutSubscriptionsRoute =
+  AppSettingsLayoutSubscriptionsImport.update({
+    id: '/subscriptions',
+    path: '/subscriptions',
+    getParentRoute: () => AppSettingsLayoutRoute,
+  } as any)
+
+const AppSettingsLayoutProfileRoute = AppSettingsLayoutProfileImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppSettingsLayoutRoute,
 } as any)
 
 const AppDocsLayoutDocsHelpIndexLazyRoute =
@@ -178,6 +213,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDocsLayoutDocsImport
       parentRoute: typeof AppDocsRoute
     }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/settings/_layout': {
+      id: '/_app/settings/_layout'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsLayoutImport
+      parentRoute: typeof AppSettingsRoute
+    }
+    '/_app/settings/_layout/profile': {
+      id: '/_app/settings/_layout/profile'
+      path: '/profile'
+      fullPath: '/settings/profile'
+      preLoaderRoute: typeof AppSettingsLayoutProfileImport
+      parentRoute: typeof AppSettingsLayoutImport
+    }
+    '/_app/settings/_layout/subscriptions': {
+      id: '/_app/settings/_layout/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/settings/subscriptions'
+      preLoaderRoute: typeof AppSettingsLayoutSubscriptionsImport
+      parentRoute: typeof AppSettingsLayoutImport
+    }
+    '/_app/settings/_layout/': {
+      id: '/_app/settings/_layout/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof AppSettingsLayoutIndexImport
+      parentRoute: typeof AppSettingsLayoutImport
+    }
     '/_app/docs/_layout-docs/about/': {
       id: '/_app/docs/_layout-docs/about/'
       path: '/about'
@@ -249,14 +319,43 @@ const AppDocsRouteChildren: AppDocsRouteChildren = {
 const AppDocsRouteWithChildren =
   AppDocsRoute._addFileChildren(AppDocsRouteChildren)
 
+interface AppSettingsLayoutRouteChildren {
+  AppSettingsLayoutProfileRoute: typeof AppSettingsLayoutProfileRoute
+  AppSettingsLayoutSubscriptionsRoute: typeof AppSettingsLayoutSubscriptionsRoute
+  AppSettingsLayoutIndexRoute: typeof AppSettingsLayoutIndexRoute
+}
+
+const AppSettingsLayoutRouteChildren: AppSettingsLayoutRouteChildren = {
+  AppSettingsLayoutProfileRoute: AppSettingsLayoutProfileRoute,
+  AppSettingsLayoutSubscriptionsRoute: AppSettingsLayoutSubscriptionsRoute,
+  AppSettingsLayoutIndexRoute: AppSettingsLayoutIndexRoute,
+}
+
+const AppSettingsLayoutRouteWithChildren =
+  AppSettingsLayoutRoute._addFileChildren(AppSettingsLayoutRouteChildren)
+
+interface AppSettingsRouteChildren {
+  AppSettingsLayoutRoute: typeof AppSettingsLayoutRouteWithChildren
+}
+
+const AppSettingsRouteChildren: AppSettingsRouteChildren = {
+  AppSettingsLayoutRoute: AppSettingsLayoutRouteWithChildren,
+}
+
+const AppSettingsRouteWithChildren = AppSettingsRoute._addFileChildren(
+  AppSettingsRouteChildren,
+)
+
 interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppDocsRoute: typeof AppDocsRouteWithChildren
+  AppSettingsRoute: typeof AppSettingsRouteWithChildren
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppDocsRoute: AppDocsRouteWithChildren,
+  AppSettingsRoute: AppSettingsRouteWithChildren,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -282,6 +381,10 @@ export interface FileRoutesByFullPath {
   '/sign-up': typeof AuthSignUpRoute
   '/': typeof AppIndexRoute
   '/docs': typeof AppDocsLayoutDocsRouteWithChildren
+  '/settings': typeof AppSettingsLayoutRouteWithChildren
+  '/settings/profile': typeof AppSettingsLayoutProfileRoute
+  '/settings/subscriptions': typeof AppSettingsLayoutSubscriptionsRoute
+  '/settings/': typeof AppSettingsLayoutIndexRoute
   '/docs/about': typeof AppDocsLayoutDocsAboutIndexRoute
   '/docs/introduction': typeof AppDocsLayoutDocsIntroductionIndexRoute
   '/docs/users': typeof AppDocsLayoutDocsUsersIndexRoute
@@ -296,6 +399,9 @@ export interface FileRoutesByTo {
   '/sign-up': typeof AuthSignUpRoute
   '/': typeof AppIndexRoute
   '/docs': typeof AppDocsLayoutDocsRouteWithChildren
+  '/settings': typeof AppSettingsLayoutIndexRoute
+  '/settings/profile': typeof AppSettingsLayoutProfileRoute
+  '/settings/subscriptions': typeof AppSettingsLayoutSubscriptionsRoute
   '/docs/about': typeof AppDocsLayoutDocsAboutIndexRoute
   '/docs/introduction': typeof AppDocsLayoutDocsIntroductionIndexRoute
   '/docs/users': typeof AppDocsLayoutDocsUsersIndexRoute
@@ -313,6 +419,11 @@ export interface FileRoutesById {
   '/_app/': typeof AppIndexRoute
   '/_app/docs': typeof AppDocsRouteWithChildren
   '/_app/docs/_layout-docs': typeof AppDocsLayoutDocsRouteWithChildren
+  '/_app/settings': typeof AppSettingsRouteWithChildren
+  '/_app/settings/_layout': typeof AppSettingsLayoutRouteWithChildren
+  '/_app/settings/_layout/profile': typeof AppSettingsLayoutProfileRoute
+  '/_app/settings/_layout/subscriptions': typeof AppSettingsLayoutSubscriptionsRoute
+  '/_app/settings/_layout/': typeof AppSettingsLayoutIndexRoute
   '/_app/docs/_layout-docs/about/': typeof AppDocsLayoutDocsAboutIndexRoute
   '/_app/docs/_layout-docs/introduction/': typeof AppDocsLayoutDocsIntroductionIndexRoute
   '/_app/docs/_layout-docs/users/': typeof AppDocsLayoutDocsUsersIndexRoute
@@ -329,6 +440,10 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/'
     | '/docs'
+    | '/settings'
+    | '/settings/profile'
+    | '/settings/subscriptions'
+    | '/settings/'
     | '/docs/about'
     | '/docs/introduction'
     | '/docs/users'
@@ -342,6 +457,9 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/'
     | '/docs'
+    | '/settings'
+    | '/settings/profile'
+    | '/settings/subscriptions'
     | '/docs/about'
     | '/docs/introduction'
     | '/docs/users'
@@ -357,6 +475,11 @@ export interface FileRouteTypes {
     | '/_app/'
     | '/_app/docs'
     | '/_app/docs/_layout-docs'
+    | '/_app/settings'
+    | '/_app/settings/_layout'
+    | '/_app/settings/_layout/profile'
+    | '/_app/settings/_layout/subscriptions'
+    | '/_app/settings/_layout/'
     | '/_app/docs/_layout-docs/about/'
     | '/_app/docs/_layout-docs/introduction/'
     | '/_app/docs/_layout-docs/users/'
@@ -393,7 +516,8 @@ export const routeTree = rootRoute
       "filePath": "_app.tsx",
       "children": [
         "/_app/",
-        "/_app/docs"
+        "/_app/docs",
+        "/_app/settings"
       ]
     },
     "/_auth": {
@@ -437,6 +561,34 @@ export const routeTree = rootRoute
         "/_app/docs/_layout-docs/help/",
         "/_app/docs/_layout-docs/users/$id/"
       ]
+    },
+    "/_app/settings": {
+      "filePath": "_app/settings",
+      "parent": "/_app",
+      "children": [
+        "/_app/settings/_layout"
+      ]
+    },
+    "/_app/settings/_layout": {
+      "filePath": "_app/settings/_layout.tsx",
+      "parent": "/_app/settings",
+      "children": [
+        "/_app/settings/_layout/profile",
+        "/_app/settings/_layout/subscriptions",
+        "/_app/settings/_layout/"
+      ]
+    },
+    "/_app/settings/_layout/profile": {
+      "filePath": "_app/settings/_layout.profile.tsx",
+      "parent": "/_app/settings/_layout"
+    },
+    "/_app/settings/_layout/subscriptions": {
+      "filePath": "_app/settings/_layout.subscriptions.tsx",
+      "parent": "/_app/settings/_layout"
+    },
+    "/_app/settings/_layout/": {
+      "filePath": "_app/settings/_layout.index.tsx",
+      "parent": "/_app/settings/_layout"
     },
     "/_app/docs/_layout-docs/about/": {
       "filePath": "_app/docs/_layout-docs/about/index.tsx",

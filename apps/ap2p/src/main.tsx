@@ -30,7 +30,7 @@ const openReactQueryDevtools = import.meta.env.DEV
 // const container = document.getElementById("root")
 // const root = createRoot(container as Element)
 
-export const router = createRouter({
+const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   context: {

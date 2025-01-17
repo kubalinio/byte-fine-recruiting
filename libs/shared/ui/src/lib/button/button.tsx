@@ -30,7 +30,7 @@ const buttonVariants = tv({
       },
       outline: {
         button:
-          "text-foreground border border-input bg-white hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background active:bg-white",
+          "text-[#949090] border-2 border-[#D3D1D1] bg-white hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background active:bg-white",
         loading: "!border-primary !border-l-transparent"
       },
       secondary: {
@@ -46,6 +46,10 @@ const buttonVariants = tv({
         button: "text-primary underline-offset-4 hover:underline",
         loading: "text-primary-foreground"
       }
+      // "link-sidebar": {
+      //   button: "text-primary underline-offset-4 hover:underline",
+      //   loading: "text-primary-foreground"
+      // }
     },
     size: {
       default: {
@@ -110,19 +114,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <span
-          className={cn("opacity-100", {
-            "opacity-0": loading
-          })}
-        >
-          {children}
-        </span>
+        {loading && (
+          <span
+            className={cn("opacity-100", {
+              "opacity-0": loading
+            })}
+          >
+            {children}
+          </span>
+        )}
 
         {loading && (
           <span className='absolute inset-0 flex items-center justify-center'>
             <span className={styles.loading()} />
           </span>
         )}
+
+        {!loading && children}
       </Comp>
     )
   }

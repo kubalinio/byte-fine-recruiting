@@ -1,9 +1,11 @@
 import { AxiosInstance } from "axios"
 
 import {
+  ResetPasswordMutationArgs,
   SignInMutationArgs,
   SignInMutationResponse,
-  SignUpMutationArgs
+  SignUpMutationArgs,
+  UpdateUserMutationArgs
   // MUTATION_TYPE_IMPORTS
 } from "./auth.types"
 
@@ -25,10 +27,23 @@ export const authMutations = {
         })
       ).data
     },
+
   signUpMutation:
     (client: AxiosInstance) => async (data: SignUpMutationArgs) => {
       const response = await client.post("/auth/register", data)
+      return response.data
+    },
 
+  resetPasswordMutation:
+    (client: AxiosInstance) => async (data: ResetPasswordMutationArgs) => {
+      const response = await client.post("/auth/reset-password", data)
+
+      return response.data
+    },
+
+  updateUserMutation:
+    (client: AxiosInstance) => async (data: UpdateUserMutationArgs) => {
+      const response = await client.patch("/users/me", data)
       return response.data
     }
 }

@@ -24,7 +24,6 @@ export default defineConfig({
       jsxImportSource: "@welldone-software/why-did-you-render"
     }),
     nxViteTsPaths(),
-    // viteTsconfigPaths(),
     svgrPlugin(),
     nxCopyAssetsPlugin(["*.md"]),
     TanStackRouterVite({
@@ -45,7 +44,7 @@ export default defineConfig({
   //  plugins: [ nxViteTsPaths() ],
   // },
   build: {
-    outDir: "./build/ap2p",
+    outDir: "./dist",
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {

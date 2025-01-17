@@ -75,7 +75,7 @@ const SignInFormSchema = z.object({
     .min(8, { message: "password-too-short" })
 })
 
-const SetNewPasswordSchema = z
+const ResetPasswordFormSchema = z
   .object({
     password: z
       .string()
@@ -88,4 +88,16 @@ const SetNewPasswordSchema = z
     path: ["password_confirm"]
   })
 
-export { SetNewPasswordSchema, SignInFormSchema, SignUpFormSchema }
+const UpdateUserFormSchema = z.object({
+  first_name: z.string().min(2, { message: "first-name-min" }),
+  last_name: z.string().min(2, { message: "last-name-min" }),
+  email: z.string().email({ message: "email-invalid" }),
+  phone: PhoneValidator.or(z.undefined())
+})
+
+export {
+  ResetPasswordFormSchema,
+  SignInFormSchema,
+  SignUpFormSchema,
+  UpdateUserFormSchema
+}
