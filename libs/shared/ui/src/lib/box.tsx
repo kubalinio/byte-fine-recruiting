@@ -9,7 +9,7 @@ const boxVariants = cva("", {
   variants: {
     variant: {
       default: "",
-      card: "rounded-[1.25rem] shadow-z2 border-2 border-gray-300"
+      card: "rounded-[1.25rem] border-2 border-border"
     },
     padding: {
       sm: "p-4",

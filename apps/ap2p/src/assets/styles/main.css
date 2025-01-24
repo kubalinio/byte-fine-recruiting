@@ -3,29 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 205.71 4.35% 31.57%;
+  --background: 220 23% 97%;
+  --foreground: 216 2% 49%;
+
   --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --primary: 218.76 72.2% 56.27%;
-  --primary-foreground: 211 24% 17%;
-  --secondary: 324.29 71.59% 65.49%;
-  --secondary-foreground: 211 24% 17%;
-  --info: 209 100% 55%;
-  --success: 106 67% 51%;
-  --warning: 45 100% 51%;
-  --error: 2 100% 63%;
-  --error-foreground: 211 24% 17%;
-  --radius: 0.5rem;
-  --ring: 215 20.2% 65.1%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 211 24% 17%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --card: 0 0% 100%;
-  --card-foreground: 211 24% 17%;
+  --muted-foreground: 200, 2%, 66%;
   --accent: 216 12.2% 83.92%;
   --accent-foreground: 211 24% 17%;
+
+  --primary: 240 62% 59%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 204, 17%, 33%;
+  --secondary-foreground: 0 0% 100%;
+
+  --success: 169 100% 30%;
+  --success-hover: 169.13 100% 27.06%;
+  --error: 357 100% 63%;
+  --error-hover: 356.84 76.68% 56.27%;
+  --warning: 34 100% 63%;
+  --warning-hover: 34.74 76.68% 56.27%;
+  --info: 196 77% 60%;
+  --info-hover: 196.48 60.68% 54.12%;
+
+  --card: 0 0% 91%;
+  --card-foreground: 216, 2%, 49%;
+  --border: 0 0% 91;
+  --input: 0 0% 91;
+  --popover: 0 0% 100%;
+  --popover-foreground: 248 65% 17%;
+  --radius: 5px;
 
   --sidebar-background: 0 0% 98%;
   --sidebar-foreground: 240 5.3% 26.1%;
@@ -35,6 +41,9 @@
   --sidebar-accent-foreground: 240 5.9% 10%;
   --sidebar-border: 220 13% 91%;
   --sidebar-ring: 217.2 91.2% 59.8%;
+
+  /* No values for these in figma */
+  --ring: 215 20.2% 65.1%;
 }
 
 .dark {

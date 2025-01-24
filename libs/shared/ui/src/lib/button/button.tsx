@@ -20,13 +20,13 @@ const buttonVariants = tv({
     variant: {
       default: {
         button:
-          "bg-primary text-white hover:bg-primary/90 focus:bg-primary/80 active:bg-primary/90 shadow-zButton",
-        loading: "bg-primary/90 text-primary-foreground"
+          "bg-gradient-primary text-white hover:bg-gradient-primary-hover focus:bg-gradient-primary-hover active:bg-gradient-primary-hover shadow-zButton",
+        loading: "bg-gradient-primary-hover text-primary-foreground"
       },
       destructive: {
         button:
-          "bg-error text-error-foreground hover:bg-error/90 focus:bg-error/80 shadow-zButton",
-        loading: "bg-error/90 text-error-foreground"
+          "bg-gradient-error text-primary-foreground hover:bg-gradient-error-hover focus:bg-gradient-error-hover active:bg-gradient-error-hover shadow-zButton",
+        loading: "bg-gradient-error-hover text-error-foreground"
       },
       outline: {
         button:
