@@ -1,10 +1,10 @@
 import {
-  ErrorBoundaryProps as ReactErrorBoundaryProps,
   FallbackProps as ErrorBoundaryFallbackProps,
-} from "react-error-boundary";
+  ErrorBoundaryProps as ReactErrorBoundaryProps
+} from "react-error-boundary"
 
 export type ErrorBoundaryProps = ReactErrorBoundaryProps & {
-  shouldLog?: boolean;
-};
+  shouldLog?: boolean
+}
 
-export type FallbackProps = ErrorBoundaryFallbackProps;
+export type FallbackProps = ErrorBoundaryFallbackProps

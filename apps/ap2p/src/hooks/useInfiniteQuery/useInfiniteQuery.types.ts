@@ -1,11 +1,13 @@
-import { ExtendedQueryMeta, StandardizedApiError } from "@ap2p/api-client";
 import {
-  UseInfiniteQueryOptions as UseInfiniteRQQueryOptions,
   InfiniteData,
   QueryFunction,
   QueryKey,
-} from "@tanstack/react-query";
-import { AxiosInstance } from "axios";
+  UseInfiniteQueryOptions as UseInfiniteRQQueryOptions
+} from "@tanstack/react-query"
+
+import { AxiosInstance } from "axios"
+
+import { ExtendedQueryMeta, StandardizedApiError } from "@ap2p/api-client"
 
 export type UseInfiniteQueryOptions<
   TQueryFnData = unknown,
@@ -22,13 +24,13 @@ export type UseInfiniteQueryOptions<
   >,
   "queryFn"
 > & {
-  meta?: Partial<ExtendedQueryMeta>;
+  meta?: Partial<ExtendedQueryMeta>
   queryFn: (
     client: AxiosInstance
-  ) => QueryFunction<TQueryFnData, QueryKey, TPageParam>;
-};
+  ) => QueryFunction<TQueryFnData, QueryKey, TPageParam>
+}
 
 export type GenericInfiniteQueryOptions<
   TQueryFnData,
   TError = StandardizedApiError
-> = Omit<UseInfiniteQueryOptions<TQueryFnData, TError>, "queryKey" | "queryFn">;
+> = Omit<UseInfiniteQueryOptions<TQueryFnData, TError>, "queryKey" | "queryFn">

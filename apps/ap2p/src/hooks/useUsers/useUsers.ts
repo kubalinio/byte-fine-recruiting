@@ -1,4 +1,5 @@
-import { authQueries } from "@ap2p/auth";
-import { useInfiniteQuery } from "../useInfiniteQuery/useInfiniteQuery";
+import { authQueries } from "@ap2p/auth"
 
-export const useUsers = () => useInfiniteQuery(authQueries.listInfinite({}));
+import { useInfiniteQuery } from "../useInfiniteQuery/useInfiniteQuery"
+
+export const useUsers = () => useInfiniteQuery(authQueries.listInfinite({}))

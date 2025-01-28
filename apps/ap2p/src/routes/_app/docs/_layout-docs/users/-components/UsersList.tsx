@@ -1,5 +1,6 @@
-import { authQueries } from "@ap2p/auth"
 import { useNavigate, useSearch } from "@tanstack/react-router"
+
+import { authQueries } from "@ap2p/auth"
 
 import { useQuery } from "../../../../../../hooks/useQuery/useQuery"
 import { CodeBlock } from "../../../../../../ui/codeBlock/CodeBlock"

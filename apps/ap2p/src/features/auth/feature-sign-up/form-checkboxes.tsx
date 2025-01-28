@@ -7,6 +7,8 @@ import type {
   PathValue
 } from "react-hook-form"
 
+import { useFormContext } from "react-hook-form"
+
 import {
   Checkbox,
   FormControl,
@@ -17,7 +19,6 @@ import {
   FormMessage
 } from "@ap2p/ui"
 import { cn } from "@ap2p/utils"
-import { useFormContext } from "react-hook-form"
 
 type NCheckboxFieldProps = {
   className?: string

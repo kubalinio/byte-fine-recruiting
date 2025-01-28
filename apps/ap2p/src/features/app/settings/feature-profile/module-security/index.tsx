@@ -1,5 +1,6 @@
+import { EditableContextProvider } from "features/app/settings/feature-profile/shared/editable-context/editable-context-controller"
+
 import { Box, Typography } from "@ap2p/ui"
-import { EditableContextProvider } from "features/app/settings/feature-profile/shared/editable-context-controller"
 
 import { ChangePasswordForm } from "./components/change-password-form"
 import { PasswordReadonly } from "./components/password-readonly"

@@ -1,6 +1,11 @@
 "use client"
 
+import { useNavigate } from "@tanstack/react-router"
+
 import type { LucideIcon } from "lucide-react"
+
+import { Link } from "features/shared/components/link"
+import { ChevronRight } from "lucide-react"
 
 import {
   Collapsible,
@@ -14,9 +19,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem
 } from "@ap2p/ui"
-import { useNavigate } from "@tanstack/react-router"
-import { Link } from "features/shared/components/link"
-import { ChevronRight } from "lucide-react"
 
 export function NavMain({
   items

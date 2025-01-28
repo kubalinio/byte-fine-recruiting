@@ -1,29 +1,12 @@
-import { createContext, ReactNode, useContext, useRef } from "react"
+import { ReactNode, useRef } from "react"
+
+import { PencilLine } from "lucide-react"
 
 import { Button } from "@ap2p/ui"
 import { cn } from "@ap2p/utils"
-import { PencilLine } from "lucide-react"
-import { create } from "zustand"
 
-// Define the store state type
-interface EditableState {
-  isEditing: boolean
-  toggleEdit: () => void
-  setEditing: (value: boolean) => void
-}
-
-// Create store factory
-const createEditableStore = (defaultValue = false) =>
-  create<EditableState>((set) => ({
-    isEditing: defaultValue,
-    toggleEdit: () => set((state) => ({ isEditing: !state.isEditing })),
-    setEditing: (value: boolean) => set({ isEditing: value })
-  }))
-
-// Create the context to hold the store instance
-const EditableContext = createContext<
-  ReturnType<typeof createEditableStore> | undefined
->(undefined)
+import { createEditableStore, EditableContext } from "./editable-store"
+import { useEditable } from "./use-editable"
 
 // Props interface for the provider
 interface EditableContextProviderProps {
@@ -32,7 +15,7 @@ interface EditableContextProviderProps {
 }
 
 // Provider component that creates a new store instance for each provider
-export const EditableContextProvider = ({
+const EditableContextProvider = ({
   children,
   defaultValue = false
 }: EditableContextProviderProps) => {
@@ -46,25 +29,8 @@ export const EditableContextProvider = ({
   )
 }
 
-// Custom hook to use the editable store from context
-export const useEditable = () => {
-  const store = useContext(EditableContext)
-
-  if (!store) {
-    throw new Error(
-      "useEditable must be used within an EditableContextProvider"
-    )
-  }
-
-  return {
-    isEditing: store((state) => state.isEditing),
-    toggleEdit: store((state) => state.toggleEdit),
-    setEditing: store((state) => state.setEditing)
-  }
-}
-
 // EditButton component with toggle functionality
-export const EditButton = ({
+const EditButton = ({
   children,
   className
 }: {
@@ -93,3 +59,5 @@ export const EditButton = ({
     </Button>
   )
 }
+
+export { EditableContextProvider, EditButton }

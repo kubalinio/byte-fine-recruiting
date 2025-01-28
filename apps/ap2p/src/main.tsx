@@ -1,16 +1,16 @@
 import "./assets/styles/main.css"
 
 import React from "react"
-
-import { useAuth } from "@ap2p/auth"
-import { Toaster } from "@ap2p/ui"
+import ReactDOM from "react-dom/client"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import {
   createRouter,
   ErrorComponent,
   RouterProvider
 } from "@tanstack/react-router"
-import ReactDOM from "react-dom/client"
+
+import { useAuth } from "@ap2p/auth"
+import { Toaster } from "@ap2p/ui"
 
 import { AppProviders } from "./providers/app-providers"
 import { routeTree } from "./routeTree.gen"
@@ -26,9 +26,6 @@ const openReactQueryDevtools = import.meta.env.DEV
 // if (import.meta.env.VITE_SENTRY_DSN) {
 //   logger.init();
 // }
-
-// const container = document.getElementById("root")
-// const root = createRoot(container as Element)
 
 const router = createRouter({
   routeTree,
@@ -68,14 +65,27 @@ function App() {
   )
 }
 
-const rootElement = document.getElementById("root")!
-const root = ReactDOM.createRoot(rootElement)
-// if (rootElement.innerHTML) {
-enableMocking().then(() =>
+// Create root only once
+let root: ReactDOM.Root | null = null
+
+const initApp = async () => {
+  if (import.meta.env.DEV) {
+    await enableMocking()
+  }
+
+  const rootElement = document.getElementById("root")
+  if (!rootElement) throw new Error("Root element not found")
+
+  // Create root only if it hasn't been created yet
+  if (!root) {
+    root = ReactDOM.createRoot(rootElement)
+  }
+
   root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   )
-)
-// }
+}
+
+initApp()

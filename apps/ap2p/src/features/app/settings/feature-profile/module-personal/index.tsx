@@ -1,8 +1,9 @@
-import { Box, Typography } from "@ap2p/ui"
 import {
   EditableContextProvider,
   EditButton
-} from "features/app/settings/feature-profile/shared/editable-context-controller"
+} from "features/app/settings/feature-profile/shared/editable-context/editable-context-controller"
+
+import { Box, Typography } from "@ap2p/ui"
 
 import { PersonalForm } from "./components/personal-form"
 import { ReadonlyData } from "./components/readonly-data"

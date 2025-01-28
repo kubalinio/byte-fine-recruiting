@@ -1,10 +1,11 @@
+import { DefaultBodyType, HttpResponse, PathParams } from "msw"
+
 import {
   GetMeQueryResponse,
   GetUsersResponse,
   SignInMutationArgs,
   SignInMutationResponse
 } from "@ap2p/auth"
-import { DefaultBodyType, HttpResponse, PathParams } from "msw"
 
 import { http } from "./http"
 

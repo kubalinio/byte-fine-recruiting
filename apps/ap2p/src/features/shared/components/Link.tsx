@@ -1,9 +1,10 @@
-import { ButtonProps, buttonVariants } from "@ap2p/ui"
-import { cn } from "@ap2p/utils"
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps
 } from "@tanstack/react-router"
+
+import { ButtonProps, buttonVariants } from "@ap2p/ui"
+import { cn } from "@ap2p/utils"
 
 type LinkProps = {
   className?: string

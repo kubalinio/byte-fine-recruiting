@@ -7,9 +7,9 @@
 //   captureConsoleIntegration,
 // } from '@sentry/browser';
 
-type LogLevel = "error" | "info" | "warning";
+type LogLevel = "error" | "info" | "warning"
 type Logger = Record<LogLevel, (message: string | Error) => void> &
-  Record<string, unknown>;
+  Record<string, unknown>
 
 // const initLogger = () =>
 //   init({

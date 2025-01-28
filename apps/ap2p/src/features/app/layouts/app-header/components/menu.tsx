@@ -1,5 +1,6 @@
-import { Button } from "@ap2p/ui"
 import { Earth } from "lucide-react"
+
+import { Button } from "@ap2p/ui"
 
 const Menu = () => {
   return (

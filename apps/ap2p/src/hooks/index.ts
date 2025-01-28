@@ -1,2 +1,2 @@
-export * from "./useLocale/useLocale";
-export * from "./useUsers/useUsers";
+export * from "./useLocale/useLocale"
+export * from "./useUsers/useUsers"

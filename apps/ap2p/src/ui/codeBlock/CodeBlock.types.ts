@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode } from "react"
 
 export type CodeBlockProps = {
-  className?: string;
-  children?: ReactNode;
-};
+  className?: string
+  children?: ReactNode
+}

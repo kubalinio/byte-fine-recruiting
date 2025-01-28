@@ -1,1 +1,1 @@
-export * from "./locationInfo/LocationInfo";
+export * from "./locationInfo/LocationInfo"

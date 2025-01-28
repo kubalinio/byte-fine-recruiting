@@ -4,6 +4,10 @@ import React from "react"
 
 import type { FieldValues, Path } from "react-hook-form"
 
+import { useLocale } from "hooks/index"
+import { TranslateFn } from "i18n/messages"
+import { useFormContext } from "react-hook-form"
+
 import {
   FormControl,
   FormDescription,
@@ -14,9 +18,6 @@ import {
   Input
 } from "@ap2p/ui"
 import { cn } from "@ap2p/utils"
-import { useLocale } from "hooks/index"
-import { TranslateFn } from "i18n/messages"
-import { useFormContext } from "react-hook-form"
 
 type NInputFieldProps = {
   className?: string

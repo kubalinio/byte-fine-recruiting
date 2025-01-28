@@ -1,7 +1,8 @@
 import { useId, useState } from "react"
 
-import { Switch } from "@ap2p/ui"
 import { Moon, Sun } from "lucide-react"
+
+import { Switch } from "@ap2p/ui"
 
 const ThemeSwitcher = () => {
   const id = useId()
@@ -16,7 +17,7 @@ const ThemeSwitcher = () => {
     >
       <span
         id={`${id}-off`}
-        className='group-data-[state=checked]:text-muted-foreground/70 flex-1 cursor-not-allowed text-right text-sm font-medium'
+        className='flex-1 cursor-not-allowed text-right text-sm font-medium group-data-[state=checked]:text-muted-foreground/70'
         aria-controls={id}
         // onClick={() => setChecked(false)}
       >
@@ -33,7 +34,7 @@ const ThemeSwitcher = () => {
       />
       <span
         id={`${id}-on`}
-        className='group-data-[state=unchecked]:text-muted-foreground/70 flex-1 cursor-not-allowed text-left text-sm font-medium'
+        className='flex-1 cursor-not-allowed text-left text-sm font-medium group-data-[state=unchecked]:text-muted-foreground/70'
         aria-controls={id}
         // onClick={() => setChecked(true)}
       >

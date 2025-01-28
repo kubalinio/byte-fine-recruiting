@@ -1,8 +1,10 @@
-import { GetMeQueryResponse, UpdateUserFormTypes, useAuth } from "@ap2p/auth"
-import { toast } from "@ap2p/ui"
 import { useQueryClient } from "@tanstack/react-query"
+
 import { useMutation } from "hooks/use-mutation/use-mutation"
 import { SubmitHandler } from "react-hook-form"
+
+import { GetMeQueryResponse, UpdateUserFormTypes, useAuth } from "@ap2p/auth"
+import { toast } from "@ap2p/ui"
 
 const useUpdateUser = () => {
   const { user } = useAuth()

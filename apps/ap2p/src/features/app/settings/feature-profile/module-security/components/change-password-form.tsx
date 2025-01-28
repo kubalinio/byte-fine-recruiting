@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 
-import { ResetPasswordFormSchema, ResetPasswordFormTypes } from "@ap2p/auth"
-import { Box, Button, Form } from "@ap2p/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ControlledPasswordField } from "features/shared/components/form-fields"
 import { useForm } from "react-hook-form"
 
-import { useEditable } from "../../shared/editable-context-controller"
+import { ResetPasswordFormSchema, ResetPasswordFormTypes } from "@ap2p/auth"
+import { Box, Button, Form } from "@ap2p/ui"
+
+import { useEditable } from "../../shared/editable-context"
 
 type ChangePasswordFormProps = {
   onSubmit: (data: ResetPasswordFormTypes) => void

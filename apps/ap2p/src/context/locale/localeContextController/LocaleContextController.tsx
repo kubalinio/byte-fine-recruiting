@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { IntlProvider } from "react-intl";
+import { useState } from "react"
 
-import { AppLocale } from "../AppLocale.enum";
-import { defaultLocale } from "../defaultLocale";
-import { LocaleContext } from "../localeContext/LocaleContext";
+import { IntlProvider } from "react-intl"
 
-import { LocaleContextControllerProps } from "./LocaleContextController.types";
-import { translations } from "../../../i18n/messages";
+import { translations } from "../../../i18n/messages"
+import { AppLocale } from "../AppLocale.enum"
+import { defaultLocale } from "../defaultLocale"
+import { LocaleContext } from "../localeContext/LocaleContext"
+import { LocaleContextControllerProps } from "./LocaleContextController.types"
 
 export const LocaleContextController = ({
-  children,
+  children
 }: LocaleContextControllerProps) => {
-  const [locale, setLocale] = useState<AppLocale>(defaultLocale);
+  const [locale, setLocale] = useState<AppLocale>(defaultLocale)
 
   return (
     <IntlProvider
@@ -23,5 +23,5 @@ export const LocaleContextController = ({
         {children}
       </LocaleContext.Provider>
     </IntlProvider>
-  );
-};
+  )
+}

@@ -1,8 +1,9 @@
-import { Typography } from "@ap2p/ui"
 import {
   EditButton,
   useEditable
-} from "features/app/settings/feature-profile/shared/editable-context-controller"
+} from "features/app/settings/feature-profile/shared/editable-context"
+
+import { Typography } from "@ap2p/ui"
 
 const PasswordReadonly = () => {
   const { isEditing } = useEditable()

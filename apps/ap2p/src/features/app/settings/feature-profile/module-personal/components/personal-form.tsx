@@ -1,18 +1,19 @@
 import { useEffect } from "react"
 
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useEditable } from "features/app/settings/feature-profile/shared/editable-context"
+import {
+  ControlledInputField,
+  ControlledPhoneField
+} from "features/shared/components/form-fields"
+import { useForm } from "react-hook-form"
+
 import {
   GetMeQueryResponse,
   UpdateUserFormSchema,
   UpdateUserFormTypes
 } from "@ap2p/auth"
 import { Box, Button, Form } from "@ap2p/ui"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useEditable } from "features/app/settings/feature-profile/shared/editable-context-controller"
-import {
-  ControlledInputField,
-  ControlledPhoneField
-} from "features/shared/components/form-fields"
-import { useForm } from "react-hook-form"
 
 type PersonalFormProps = {
   defaultData: GetMeQueryResponse | undefined

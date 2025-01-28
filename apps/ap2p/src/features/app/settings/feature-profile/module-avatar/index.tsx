@@ -1,5 +1,6 @@
-import { Avatar, AvatarFallback, Badge, Box } from "@ap2p/ui"
 import { Camera } from "lucide-react"
+
+import { Avatar, AvatarFallback, Badge, Box } from "@ap2p/ui"
 
 const ModuleAvatar = () => {
   return (

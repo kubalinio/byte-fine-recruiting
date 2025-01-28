@@ -1,8 +1,10 @@
-import { SignUpFormSchemaType } from "@ap2p/auth"
 import { useNavigate } from "@tanstack/react-router"
+
 import { useMutation } from "hooks/use-mutation/use-mutation"
 import { SubmitHandler } from "react-hook-form"
 import { toast } from "sonner"
+
+import { SignUpFormSchemaType } from "@ap2p/auth"
 
 const useSignUp = () => {
   const navigate = useNavigate()

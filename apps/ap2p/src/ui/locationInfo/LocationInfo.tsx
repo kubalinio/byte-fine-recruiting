@@ -1,21 +1,22 @@
-import { useRouterState } from "@tanstack/react-router";
-import { CodeBlock } from "../codeBlock/CodeBlock";
+import { useRouterState } from "@tanstack/react-router"
+
+import { CodeBlock } from "../codeBlock/CodeBlock"
 
 export const LocationInfo = () => {
-  const location = useRouterState({ select: (state) => state.location });
+  const location = useRouterState({ select: (state) => state.location })
 
   return (
     <div>
       <p>
         Current location (provided by{" "}
-        <a href="https://reacttraining.com/react-router/web/api/Hooks/uselocation">
+        <a href='https://reacttraining.com/react-router/web/api/Hooks/uselocation'>
           <code>useLocation</code>
         </a>{" "}
         hook from{" "}
-        <a href="https://github.com/ReactTraining/react-router">react-router</a>
+        <a href='https://github.com/ReactTraining/react-router'>react-router</a>
         ):
       </p>
       <CodeBlock>{JSON.stringify(location)}</CodeBlock>
     </div>
-  );
-};
+  )
+}

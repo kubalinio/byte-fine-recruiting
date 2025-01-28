@@ -1,11 +1,12 @@
 import { Fragment } from "react"
-
-import { useAuth } from "@ap2p/auth"
-import { Button } from "@ap2p/ui"
 import { useNavigate } from "@tanstack/react-router"
+
 import { AppLocale } from "context/locale/AppLocale.enum"
 import { useLocale } from "hooks/useLocale/useLocale"
 import { useUsers } from "hooks/useUsers/useUsers"
+
+import { useAuth } from "@ap2p/auth"
+import { Button } from "@ap2p/ui"
 
 import { LocationInfo } from "../../../../ui/locationInfo/LocationInfo"
 import { Translation } from "../../../../ui/translation/Translation"

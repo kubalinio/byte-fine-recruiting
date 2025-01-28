@@ -1,3 +1,7 @@
+import { Link, useNavigate } from "@tanstack/react-router"
+
+import { Bolt, Dot, Layers2, LogOut, Settings } from "lucide-react"
+
 import { useAuth } from "@ap2p/auth"
 import {
   Button,
@@ -9,8 +13,6 @@ import {
   DropdownMenuTrigger,
   Typography
 } from "@ap2p/ui"
-import { Link, useNavigate } from "@tanstack/react-router"
-import { Bolt, Dot, Layers2, LogOut, Settings } from "lucide-react"
 
 const SettingDropdown = () => {
   const navigate = useNavigate()

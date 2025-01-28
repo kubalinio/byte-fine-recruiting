@@ -1,13 +1,12 @@
 import * as React from "react"
-
-import type { AuthContextValue } from "@ap2p/auth"
-
 import {
   createRootRouteWithContext,
   Outlet,
   ScrollRestoration
 } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/router-devtools"
+
+import type { AuthContextValue } from "@ap2p/auth"
 
 const enableTanstackRouterDevtools = import.meta.env.DEV
 

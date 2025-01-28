@@ -1,6 +1,6 @@
-import type { FieldValues, Path } from "react-hook-form";
+import type { FieldValues, Path } from "react-hook-form"
 
-import { useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form"
 
 import {
   FormControl,
@@ -9,24 +9,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  SwitchThin,
-} from "@ap2p/ui";
-import { cn } from "@ap2p/utils";
+  SwitchThin
+} from "@ap2p/ui"
+import { cn } from "@ap2p/utils"
 
 type NSwitchFieldProps = {
-  className?: string;
-  label?: string;
-  description?: string;
-  showError?: boolean;
-  disabled?: boolean;
-};
+  className?: string
+  label?: string
+  description?: string
+  showError?: boolean
+  disabled?: boolean
+}
 
 type SwitchControllerType<T extends FieldValues> = {
-  name: Path<T>;
-};
+  name: Path<T>
+}
 
 type ControlledSwitchFieldProps<T extends FieldValues> = NSwitchFieldProps &
-  SwitchControllerType<T>;
+  SwitchControllerType<T>
 
 const ControlledSwitchField = <T extends FieldValues>({
   name,
@@ -37,7 +37,7 @@ const ControlledSwitchField = <T extends FieldValues>({
   disabled,
   ...props
 }: ControlledSwitchFieldProps<T>) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <FormField
@@ -45,7 +45,7 @@ const ControlledSwitchField = <T extends FieldValues>({
       control={control}
       render={({ field }) => (
         <FormItem className={cn("w-full", className)}>
-          <div className="relative flex items-center">
+          <div className='relative flex items-center'>
             <FormControl>
               <SwitchThin
                 {...props}
@@ -57,7 +57,7 @@ const ControlledSwitchField = <T extends FieldValues>({
             </FormControl>
 
             {label && (
-              <FormLabel className="mb-0 ml-3 text-base font-semibold text-gray-900">
+              <FormLabel className='mb-0 ml-3 text-base font-semibold text-gray-900'>
                 {label}
               </FormLabel>
             )}
@@ -69,7 +69,7 @@ const ControlledSwitchField = <T extends FieldValues>({
         </FormItem>
       )}
     />
-  );
-};
+  )
+}
 
-export { ControlledSwitchField };
+export { ControlledSwitchField }

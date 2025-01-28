@@ -1,5 +1,6 @@
-import { Typography } from "@ap2p/ui"
 import { Logo } from "assets/images/logo"
+
+import { Typography } from "@ap2p/ui"
 
 const Header = () => {
   return (

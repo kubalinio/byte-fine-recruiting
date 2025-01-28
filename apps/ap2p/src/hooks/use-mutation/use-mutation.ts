@@ -1,22 +1,21 @@
 import {
-  useMutation as useRQMutation,
-  UseMutationOptions,
   MutationKey,
-} from "@tanstack/react-query";
+  UseMutationOptions,
+  useMutation as useRQMutation
+} from "@tanstack/react-query"
 
 import {
   ExtendedQueryMeta,
   StandardizedApiError,
-  useApiClient,
-} from "@ap2p/api-client";
-
+  useApiClient
+} from "@ap2p/api-client"
 // import { DataForMutation, GetMutationParams } from './use-mutation.types';
 import {
   AxiosMutationsType,
-  mutations,
   DataForMutation,
   GetMutationParams,
-} from "@ap2p/auth";
+  mutations
+} from "@ap2p/auth"
 
 /**
  * Mutating data using this hook doesn't require specifying mutation function like it is required in react-query
@@ -34,17 +33,17 @@ export const useMutation = <
     UseMutationOptions<DataForMutation<Key>, TError, GetMutationParams<Key>>,
     "mutationKey" | "mutationFn"
   > & {
-    meta?: Partial<ExtendedQueryMeta>;
+    meta?: Partial<ExtendedQueryMeta>
   }
 ) => {
-  const { client } = useApiClient();
-  const mutationFn = mutations[mutation](client);
-  const mutationKey: MutationKey = [mutation];
+  const { client } = useApiClient()
+  const mutationFn = mutations[mutation](client)
+  const mutationKey: MutationKey = [mutation]
 
   return useRQMutation({
     mutationKey,
     mutationFn: async (args) =>
       (await mutationFn(args)) as DataForMutation<Key>,
-    ...options,
-  });
-};
+    ...options
+  })
+}

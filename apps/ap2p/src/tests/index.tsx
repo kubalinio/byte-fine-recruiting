@@ -1,43 +1,45 @@
 // see https://testing-library.com/docs/react-testing-library/setup#custom-render
-import { Queries } from "@testing-library/dom";
-import { render, RenderOptions, RenderResult } from "@testing-library/react";
-import { useState } from "react";
-import { IntlProvider } from "react-intl";
+
+import { useState } from "react"
 import {
-  RouterProvider,
+  createMemoryHistory,
   createRootRoute,
-  Outlet,
   createRoute,
   createRouter,
-  createMemoryHistory,
-} from "@tanstack/react-router";
+  Outlet,
+  RouterProvider
+} from "@tanstack/react-router"
 
-import { AppLocale } from "../context/locale/AppLocale.enum";
-import { defaultLocale } from "../context/locale/defaultLocale";
-import { LocaleContext } from "../context/locale/localeContext/LocaleContext";
+import { Queries } from "@testing-library/dom"
+import { render, RenderOptions, RenderResult } from "@testing-library/react"
+import { IntlProvider } from "react-intl"
 
-import { ExtraRenderOptions, WrapperProps } from "./types";
-import { ApiClientContextController } from "@ap2p/api-client";
-import { AuthContext } from "@ap2p/auth";
+import { ApiClientContextController } from "@ap2p/api-client"
+import { AuthContext } from "@ap2p/auth"
+
+import { AppLocale } from "../context/locale/AppLocale.enum"
+import { defaultLocale } from "../context/locale/defaultLocale"
+import { LocaleContext } from "../context/locale/localeContext/LocaleContext"
+import { ExtraRenderOptions, WrapperProps } from "./types"
 
 // @TODO: https://bitbucket.org/thesoftwarehouse/react-starter-boilerplate/pull-requests/5/rss-9-add-login-page/diff#comment-132626297
 const _Wrapper = ({ children, routerConfig = {} }: WrapperProps) => {
-  const [locale, setLocale] = useState<AppLocale>(defaultLocale);
-  const { routerPath = "/", currentPath = routerPath } = routerConfig;
+  const [locale, setLocale] = useState<AppLocale>(defaultLocale)
+  const { routerPath = "/", currentPath = routerPath } = routerConfig
 
-  const rootRoute = createRootRoute({ component: () => <Outlet /> });
+  const rootRoute = createRootRoute({ component: () => <Outlet /> })
 
   const componentRoute = createRoute({
     path: routerPath,
     getParentRoute: () => rootRoute,
-    component: () => children,
-  });
+    component: () => children
+  })
   const router = createRouter({
     history: createMemoryHistory({
-      initialEntries: [currentPath],
+      initialEntries: [currentPath]
     }),
-    routeTree: rootRoute.addChildren([componentRoute]),
-  });
+    routeTree: rootRoute.addChildren([componentRoute])
+  })
 
   return (
     <ApiClientContextController>
@@ -50,7 +52,7 @@ const _Wrapper = ({ children, routerConfig = {} }: WrapperProps) => {
           isAuthenticated: false,
           login: vi.fn(),
           logout: vi.fn(),
-          user: undefined,
+          user: undefined
         }}
       >
         <IntlProvider
@@ -64,17 +66,17 @@ const _Wrapper = ({ children, routerConfig = {} }: WrapperProps) => {
         </IntlProvider>
       </AuthContext.Provider>
     </ApiClientContextController>
-  );
-};
+  )
+}
 
 function customRender(
   ui: React.ReactElement,
   options?: Omit<RenderOptions, "queries"> & ExtraRenderOptions
-): RenderResult;
+): RenderResult
 function customRender<Q extends Queries>(
   ui: React.ReactElement,
   options: RenderOptions<Q> & ExtraRenderOptions
-): RenderResult<Q>;
+): RenderResult<Q>
 function customRender<Q extends Queries>(
   ui: React.ReactElement,
   options?: (RenderOptions<Q> | Omit<RenderOptions, "queries">) &
@@ -82,12 +84,12 @@ function customRender<Q extends Queries>(
 ): RenderResult<Q> | RenderResult {
   const Wrapper = ({ children }: Pick<WrapperProps, "children">) => (
     <_Wrapper routerConfig={options?.routerConfig}>{children}</_Wrapper>
-  );
+  )
 
-  return render<Q>(ui, { wrapper: options?.wrapper ?? Wrapper, ...options });
+  return render<Q>(ui, { wrapper: options?.wrapper ?? Wrapper, ...options })
 }
 
 // re-export everything
-export * from "@testing-library/react";
+export * from "@testing-library/react"
 // override render method
-export { customRender as render };
+export { customRender as render }

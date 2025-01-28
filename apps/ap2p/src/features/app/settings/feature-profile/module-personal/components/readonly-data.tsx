@@ -1,7 +1,8 @@
+import { useEditable } from "features/app/settings/feature-profile/shared/editable-context"
+
 import { GetMeQueryResponse } from "@ap2p/auth"
 import { Box, Typography } from "@ap2p/ui"
 import { cn } from "@ap2p/utils"
-import { useEditable } from "features/app/settings/feature-profile/shared/editable-context-controller"
 
 type ReadonlyDataProps = {
   data: GetMeQueryResponse | undefined

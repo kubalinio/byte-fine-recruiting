@@ -1,5 +1,6 @@
-import { Separator, SidebarTrigger, useIsMobile } from "@ap2p/ui"
 import { Logo } from "assets/images/logo"
+
+import { Separator, SidebarTrigger, useIsMobile } from "@ap2p/ui"
 
 import { Menu } from "./components/menu"
 import { Profile } from "./components/profile"

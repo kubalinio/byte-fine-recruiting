@@ -1,3 +1,6 @@
+import { Logo } from "assets/images/logo"
+import { BookOpen, Bot, Plus, SquareTerminal } from "lucide-react"
+
 import {
   Button,
   Sidebar,
@@ -7,8 +10,6 @@ import {
   SidebarRail,
   SidebarTrigger
 } from "@ap2p/ui"
-import { Logo } from "assets/images/logo"
-import { BookOpen, Bot, Plus, SquareTerminal } from "lucide-react"
 
 import { NavMain } from "./components/nav-main"
 

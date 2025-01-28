@@ -1,5 +1,3 @@
-import { SignInFormSchema, SignInFormTypes } from "@ap2p/auth"
-import { Button, Form } from "@ap2p/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   ControlledCheckboxField,
@@ -8,6 +6,9 @@ import {
 } from "features/shared/components/form-fields"
 import { Link } from "features/shared/components/link"
 import { SubmitHandler, useForm } from "react-hook-form"
+
+import { SignInFormSchema, SignInFormTypes } from "@ap2p/auth"
+import { Button, Form } from "@ap2p/ui"
 
 type SignInFormProps = {
   onSubmit: SubmitHandler<SignInFormTypes>

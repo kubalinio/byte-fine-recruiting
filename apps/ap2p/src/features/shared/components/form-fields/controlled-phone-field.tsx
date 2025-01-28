@@ -2,6 +2,9 @@
 
 import type { FieldValues, Path } from "react-hook-form"
 
+import { useLocale } from "hooks/index"
+import { useFormContext } from "react-hook-form"
+
 import {
   FormControl,
   FormDescription,
@@ -12,8 +15,6 @@ import {
   PhoneInput
 } from "@ap2p/ui"
 import { cn } from "@ap2p/utils"
-import { useLocale } from "hooks/index"
-import { useFormContext } from "react-hook-form"
 
 type NPhoneInputProps = {
   className?: string

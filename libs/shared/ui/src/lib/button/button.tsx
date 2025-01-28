@@ -1,9 +1,10 @@
 import * as React from "react"
 
-import { cn } from "@ap2p/utils"
 import { Slot } from "@radix-ui/react-slot"
 import { type VariantProps } from "class-variance-authority"
 import { createTV } from "tailwind-variants"
+
+import { cn } from "@ap2p/utils"
 
 const tv = createTV({
   twMerge: true

@@ -33,7 +33,7 @@ module.exports = [
             '^.*/eslint(\\.base)?\\.config\\.[cm]?js$',
           ],
         },
-      ],
+      ]
     },
   },
 ];

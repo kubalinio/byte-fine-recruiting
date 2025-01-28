@@ -1,3 +1,8 @@
+import { Outlet } from "@tanstack/react-router"
+
+import { Link } from "features/shared/components/link"
+import { Bell, Link as LinkIcon, LucideIcon, Settings } from "lucide-react"
+
 import {
   Sidebar,
   SidebarContent,
@@ -8,9 +13,6 @@ import {
   SidebarMenuItem,
   SidebarProvider
 } from "@ap2p/ui"
-import { Outlet } from "@tanstack/react-router"
-import { Link } from "features/shared/components/link"
-import { Bell, Link as LinkIcon, LucideIcon, Settings } from "lucide-react"
 
 const data = {
   nav: [

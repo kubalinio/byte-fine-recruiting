@@ -1,5 +1,6 @@
-import { Typography } from "@ap2p/ui"
 import { Clock4 } from "lucide-react"
+
+import { Typography } from "@ap2p/ui"
 
 import { Link } from "./link"
 

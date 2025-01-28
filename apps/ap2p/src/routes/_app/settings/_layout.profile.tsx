@@ -1,8 +1,10 @@
-import { Container, Typography } from "@ap2p/ui"
 import { createFileRoute } from "@tanstack/react-router"
+
 import { ModuleAvatar } from "features/app/settings/feature-profile/module-avatar"
 import { ModulePersonal } from "features/app/settings/feature-profile/module-personal"
 import { ModuleSecurity } from "features/app/settings/feature-profile/module-security"
+
+import { Container, Typography } from "@ap2p/ui"
 
 export const Route = createFileRoute("/_app/settings/_layout/profile")({
   component: () => <FeatureProfile />

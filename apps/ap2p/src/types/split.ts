@@ -6,4 +6,4 @@ export type Split<
   ? Head extends SplitBy
     ? Accumulator | Split<Rest, SplitBy, "">
     : Split<Rest, SplitBy, `${Accumulator}${Head}`>
-  : Accumulator;
+  : Accumulator

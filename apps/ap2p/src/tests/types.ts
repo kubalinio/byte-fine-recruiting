@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
+import { ReactNode } from "react"
 
 export type RouterConfig = {
-  routerPath?: string;
-  currentPath?: string;
-};
+  routerPath?: string
+  currentPath?: string
+}
 
 export type ExtraRenderOptions = {
-  routerConfig?: RouterConfig;
-};
+  routerConfig?: RouterConfig
+}
 
 export type WrapperProps = {
-  children: ReactNode;
-  routerConfig?: RouterConfig;
-};
+  children: ReactNode
+  routerConfig?: RouterConfig
+}

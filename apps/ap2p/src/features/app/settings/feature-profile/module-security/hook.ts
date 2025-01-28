@@ -1,11 +1,12 @@
+import { useMutation } from "hooks/use-mutation/use-mutation"
+import { SubmitHandler } from "react-hook-form"
+
 import {
   ResetPasswordFormTypes,
   ResetPasswordMutationArgs,
   useAuth
 } from "@ap2p/auth"
 import { toast } from "@ap2p/ui"
-import { useMutation } from "hooks/use-mutation/use-mutation"
-import { SubmitHandler } from "react-hook-form"
 
 const useResetPassword = () => {
   const { accessToken } = useAuth()

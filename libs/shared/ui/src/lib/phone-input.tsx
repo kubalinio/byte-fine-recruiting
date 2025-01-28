@@ -9,8 +9,9 @@ import type {
   NumberType
 } from "libphonenumber-js"
 
-import { cn } from "@ap2p/utils"
 import parsePhoneNumberFromString, { AsYouType } from "libphonenumber-js"
+
+import { cn } from "@ap2p/utils"
 
 import countries from "../data/countries.json"
 import { useStateHistory } from "../hooks"

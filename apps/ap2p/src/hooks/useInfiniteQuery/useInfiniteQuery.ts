@@ -1,8 +1,8 @@
-import { useInfiniteQuery as useRQInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery as useRQInfiniteQuery } from "@tanstack/react-query"
 
-import { StandardizedApiError, useApiClient } from "@ap2p/api-client";
+import { StandardizedApiError, useApiClient } from "@ap2p/api-client"
 
-import { UseInfiniteQueryOptions } from "./useInfiniteQuery.types";
+import { UseInfiniteQueryOptions } from "./useInfiniteQuery.types"
 
 /**
  * Fetching data using this hook doesn't require specifying query function like it's required in react-query
@@ -17,11 +17,11 @@ export const useInfiniteQuery = <
 >(
   params: UseInfiniteQueryOptions<TQueryFnData, TError, TPageParam>
 ) => {
-  const { client } = useApiClient();
-  const { queryFn, ...options } = params;
+  const { client } = useApiClient()
+  const { queryFn, ...options } = params
 
   return useRQInfiniteQuery({
     ...options,
-    queryFn: queryFn(client),
-  });
-};
+    queryFn: queryFn(client)
+  })
+}
