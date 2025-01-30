@@ -7,18 +7,20 @@ import { cva } from "class-variance-authority"
 import { cn } from "utils/cn"
 
 const buttonVariants = cva(
-  "ring-offset-background focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[0.9375rem] font-semibold leading-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "focus-visible:ring-offset-primary-50 focus-visible:ring-primary-50 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[0.9375rem] font-semibold leading-6 transition-colors focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-offset-[-1px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground focus-visible:bg-primary-50 disabled:bg-black-25 p-0 hover:bg-[#550788]",
+          "bg-primary text-primary-foreground focus-visible:bg-primary-50 disabled:bg-black-25 p-0 hover:bg-[#550788] focus-visible:ring",
         destructive:
           "bg-background text-destructive hover:text-destructive/90 hover:border-destructive/90 border-destructive rounded-none border-b text-lg",
         outline:
           "border-input bg-background hover:bg-accent hover:text-accent-foreground border",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline"
+        link: "text-primary underline-offset-4 hover:underline",
+        action:
+          "bg-white-50 [&_svg]:text-black-75 hover:bg-white-25 size-full flex-col rounded-[0.625rem] focus-visible:ring-4 focus-visible:ring-inset disabled:cursor-not-allowed disabled:opacity-25 [&_svg]:size-32"
       },
       size: {
         default: "px-8 py-2",

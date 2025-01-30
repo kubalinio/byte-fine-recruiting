@@ -2,10 +2,13 @@ import { useEffect, useRef } from "react"
 
 import type { ChangeEvent } from "react"
 
+import { EditorBg } from "assets/icons"
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
 import { useShallow } from "zustand/react/shallow"
 
-const BackgroundUpload = () => {
+import { ActionButtonUpload } from "../ui/action-button"
+
+const AddBackground = () => {
   const { elements, setElements } = useCanvasStore(useShallow(CanvasSelector))
   const previousObjectUrl = useRef<string | null>(null)
 
@@ -21,15 +24,16 @@ const BackgroundUpload = () => {
   const handleUploadAndChangeBackground = (
     e: ChangeEvent<HTMLInputElement>
   ) => {
-    try {
-      const file = e.target.files?.[0]
-      if (!file) {
-        throw new Error("No file selected")
-      }
+    const file = e.target.files?.[0]
+    if (!file) {
+      return
+    }
 
+    try {
       // Clean up previous object URL if it exists
       if (previousObjectUrl.current) {
         URL.revokeObjectURL(previousObjectUrl.current)
+        previousObjectUrl.current = null
       }
 
       // Create object URL for the new image
@@ -39,7 +43,6 @@ const BackgroundUpload = () => {
       // Update the frame element (which is always the first element)
       const newElements = elements.map((element, index) => {
         if (index === 0) {
-          // Update the frame element
           return {
             ...element,
             style: {
@@ -56,26 +59,26 @@ const BackgroundUpload = () => {
       })
 
       setElements(newElements)
-    } catch (e) {
-      console.error("Error uploading image:", e)
-      alert(`Something went wrong: ${e}`)
-      throw new Error("Failed to upload and change background image.")
+    } catch (error) {
+      // Reset the previous object URL if there was an error
+      if (previousObjectUrl.current) {
+        URL.revokeObjectURL(previousObjectUrl.current)
+        previousObjectUrl.current = null
+      }
     }
   }
 
   return (
-    <div>
-      <input
-        className='w-[90%] rounded-l-md bg-[#0f1318] px-3 py-2 text-[#A49DB5] focus:ring-0'
-        type='file'
-        name='file'
-        id='file'
-        accept='image/png, image/jpeg, image/jpg, image/webp'
-        placeholder='Upload Image'
-        onChange={handleUploadAndChangeBackground}
-      />
-    </div>
+    <ActionButtonUpload
+      aria-label='Upload background image'
+      accept='image/png, image/jpeg, image/jpg, image/webp'
+      onUpload={handleUploadAndChangeBackground}
+    >
+      <EditorBg />
+
+      <span>Background</span>
+    </ActionButtonUpload>
   )
 }
 
-export { BackgroundUpload }
+export { AddBackground }
