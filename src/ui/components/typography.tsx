@@ -3,6 +3,7 @@ import React from "react"
 import type { VariantProps } from "class-variance-authority"
 
 import { cva } from "class-variance-authority"
+import { cn } from "utils/cn"
 
 const typographyVariants = cva("text-gray-800", {
   variants: {
@@ -75,7 +76,7 @@ const Typography = React.forwardRef<
   return (
     <Component
       ref={ref}
-      className={typographyVariants({ variant, className })}
+      className={cn(typographyVariants({ variant }), className)}
       {...props}
     >
       {children}

@@ -98,6 +98,9 @@ const config: Config = {
           100: "#DBF2FA",
           900: "#388EAE"
         },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+        },
 
         rounded: "hsl(var(--radius))",
         ring: "hsl(var(--ring))",
