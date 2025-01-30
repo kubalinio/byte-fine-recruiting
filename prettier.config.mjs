@@ -31,15 +31,13 @@ const config = {
     "",
     "^@/(.*)$",
     "",
-    "^@ap2p/(.*)$",
-    "",
     "^[./]",
     "",
     "^(?!.*[.]css$)[./].*$",
     ".css$",
   ],
   importOrderTypeScriptVersion: "5.4.5",
-  tailwindConfig: "./apps/ap2p/tailwind.config.ts",
+  tailwindConfig: "./tailwind.config.ts",
 };
 
 export default config;

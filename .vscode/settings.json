@@ -28,11 +28,7 @@
     }
   ],
   "eslint.useFlatConfig": true,
-  "eslint.workingDirectories": [
-    { "pattern": "apps/*/" },
-    { "pattern": "libs/*/" },
-    { "pattern": "configs/*/" }
-  ],
+  "eslint.workingDirectories": [{ "pattern": "src/*/" }],
   "eslint.validate": [
     "javascript",
     "javascriptreact",
