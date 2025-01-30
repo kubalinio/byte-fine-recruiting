@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { Logo } from "features/shared/components/logo"
-import { Button } from "ui"
+import ModuleCanvas from "features/app/module-canvas/module-canvas"
+import ModuleEditor from "features/app/module-editor/module-editor"
 
 export const Route = createFileRoute("/_app/")({
   component: () => <Dashboard />
@@ -10,16 +10,9 @@ export const Route = createFileRoute("/_app/")({
 const Dashboard = () => {
   return (
     <>
-      <div>
-        <h1>Canvas</h1>
-        <Logo className='size-10' />
-      </div>
+      <ModuleCanvas />
 
-      <div>
-        <h1>Module Panel</h1>
-
-        <Button>Add Module</Button>
-      </div>
+      <ModuleEditor />
     </>
   )
 }
