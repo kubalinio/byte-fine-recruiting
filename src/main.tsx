@@ -2,7 +2,6 @@ import "./assets/styles/main.css"
 
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import {
   createRouter,
   ErrorComponent,
@@ -14,7 +13,6 @@ import { routeTree } from "./routeTree.gen"
 if (import.meta.env.DEV) {
   import.meta.glob("./wdyr.ts", { eager: true })
 }
-const openReactQueryDevtools = import.meta.env.DEV
 
 const router = createRouter({
   routeTree,
@@ -36,8 +34,6 @@ function App() {
   return (
     <>
       <InnerApp />
-
-      {openReactQueryDevtools && <ReactQueryDevtools initialIsOpen={false} />}
     </>
   )
 }

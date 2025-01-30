@@ -6,8 +6,8 @@ export const Route = createFileRoute("/_app")({
 
 const AppLayout = () => {
   return (
-    <div>
+    <main className='flex h-screen items-center justify-center gap-x-8 py-8'>
       <Outlet />
-    </div>
+    </main>
   )
 }

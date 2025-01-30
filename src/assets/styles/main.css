@@ -3,18 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: 220 23% 97%;
-  --foreground: 216 2% 49%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 12.94%;
+
+  --primary: 226.84 96.08% 60%;
+  --primary-foreground: 0 0% 100%;
 
   --muted: 210 40% 96.1%;
   --muted-foreground: 200, 2%, 66%;
   --accent: 216 12.2% 83.92%;
   --accent-foreground: 211 24% 17%;
-
-  --primary: 240 62% 59%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 204, 17%, 33%;
-  --secondary-foreground: 0 0% 100%;
 
   --success: 169 100% 30%;
   --success-hover: 169.13 100% 27.06%;
@@ -32,40 +30,7 @@
   --popover: 0 0% 100%;
   --popover-foreground: 248 65% 17%;
   --radius: 5px;
-
-  --sidebar-background: 0 0% 98%;
-  --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 240 5.9% 10%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
-
-  /* No values for these in figma */
   --ring: 215 20.2% 65.1%;
-}
-
-.dark {
-  --background: 240 10% 3.9%;
-  --foreground: 240 4.8% 95.9%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 5.9% 10%;
-  --muted-foreground: 240 4.4% 58%;
-  --accent: 240 5.9% 10%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 3.8% 46.1%;
 }
 
 @layer base {
@@ -74,11 +39,6 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
+    @apply bg-background font-sans text-lg text-foreground;
   }
 }

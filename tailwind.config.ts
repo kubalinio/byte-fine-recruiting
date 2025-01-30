@@ -55,51 +55,23 @@ const config: Config = {
         accent: "hsl(var(--accent))",
         "accent-foreground": "hsl(var(--accent-foreground))",
 
-        "sidebar-background": "hsl(var(--sidebar-background))",
-        "sidebar-foreground": "hsl(var(--sidebar-foreground))",
-        "sidebar-primary": "hsl(var(--sidebar-primary))",
-        "sidebar-primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-        "sidebar-accent": "hsl(var(--sidebar-accent))",
-        "sidebar-accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-        "sidebar-border": "hsl(var(--sidebar-border))",
-        "sidebar-ring": "hsl(var(--sidebar-ring))",
-
         "primary-foreground": "hsl(var(--primary-foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          100: "#DDDDF7",
-          200: "#BBBBEF",
-          300: "#9A99E7",
-          400: "#7877DF",
-          500: "#5655D7",
-          600: "#4D4CC1",
-          700: "#4948B7",
-          800: "#4544AC",
-          900: "#4040A1"
+          50: "#7209b780",
+
         },
-        "secondary-foreground": "hsl(var(--secondary-foreground))",
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          100: "#DADDE0",
-          200: "#B5BCC0",
-          300: "#909AA1",
-          400: "#6B7981",
-          500: "#465762",
-          600: "#3F4E58",
-          700: "#3B4A53",
-          800: "#38464E",
-          900: "#344149"
+        black: {
+          DEFAULT: "#000000",
+          25: "#CDCDCD",
+          50: "#353535",
+          75: "#676767",
+          100: "#353535",
         },
-        gray: {
-          100: "#F4F4F4",
-          200: "#D3D3D4",
-          300: "#BCBEBF",
-          400: "#A6A8A9",
-          500: "#909294",
-          600: "#7A7C7F",
-          700: "#646669",
-          800: "#4D5154",
-          900: "#212529"
+        white: {
+          DEFAULT: "#FFFFFF",
+          25: "#FAFAFA",
+          50: "#F7F7F8"
         },
         success: {
           DEFAULT: "hsl(var(--success))",
@@ -157,18 +129,6 @@ const config: Config = {
         "gradient-primary": "linear-gradient(45deg, #5655D7 0%, #7F7EFF 100%)",
         "gradient-primary-hover":
           "linear-gradient(45deg, #5655D7e6 0%, #7F7EFFe6 100%)",
-        "gradient-secondary":
-          "linear-gradient(45deg, #586D7A 0%, #798A95 100%)",
-        "gradient-secondary-hover":
-          "linear-gradient(45deg, #586D7Ae6 0%, #798A95e6 100%)",
-        "gradient-success": "linear-gradient(45deg, #00997E 0%, #00C9A5 100%)",
-        "gradient-success-hover":
-          "linear-gradient(45deg, #00997Ee6 0%, #00C9A5e6 100%)",
-        "gradient-error": "linear-gradient(45deg, #FF414B 0%, #FF7A81 100%)",
-        "gradient-error-hover":
-          "linear-gradient(45deg, #FF414Be6 0%, #FF7A81e6 100%)",
-        "gradient-warning": "linear-gradient(45deg, #FFAE41 0%, #FFC06A 100%)",
-        "gradient-info": "linear-gradient(45deg, #4ABDE8 0%, #77DAFF 100%)"
       },
       keyframes: {
         "accordion-down": {
@@ -195,7 +155,7 @@ const config: Config = {
         "collapsible-up": "collapsible-up 0.2s ease-out"
       },
       fontFamily: {
-        sans: ["Public Sans", ...defaultTheme.fontFamily.sans]
+        sans: ["Poppins", ...defaultTheme.fontFamily.sans]
       }
     }
   },
