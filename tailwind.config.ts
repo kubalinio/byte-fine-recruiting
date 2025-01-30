@@ -1,17 +1,14 @@
-import { join } from "path"
+// import { join } from "path"
 
 // import animatePlugin from 'tailwindcss-animate';
 import defaultTheme from "tailwindcss/defaultTheme"
 
-import { Config } from "tailwindcss"
+import type { Config } from "tailwindcss"
 
 // /** @type {import('tailwindcss').Config} */
 const config: Config = {
   content: [
-    join(
-      __dirname,
-      "{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}"
-    )
+    "./src/**/*.{ts,tsx,html}"
   ],
   theme: {
     screens: {

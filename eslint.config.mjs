@@ -52,7 +52,9 @@ const config = [
           jsx: true
         },
         parser: tseslint.parser,
-        project: true
+        project: ["./tsconfig.json"],
+        tsconfigRootDir: ".",
+        allowDefaultProject: true
       }
     }
   }),
