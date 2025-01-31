@@ -104,7 +104,8 @@ const config = [
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
       "react-hooks/rules-of-hooks": "off",
-      "jsx-a11y/no-autofocus": "warn"
+      "jsx-a11y/no-autofocus": "warn",
+      "jsx-a11y/heading-has-content": "off"
     }
   }
 ]

@@ -34,7 +34,7 @@ const ResetAlert = ({ onConfirm, disabled }: ResetAlertProps) => {
             <Close className='size-8' />
           </AlertDialogCancel>
 
-          <Alert className='text-destructive mx-auto size-72' />
+          <Alert className='mx-auto size-72 text-destructive' />
 
           <AlertDialogTitle>Warning</AlertDialogTitle>
 

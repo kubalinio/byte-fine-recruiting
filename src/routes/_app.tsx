@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_app")({
 
 const AppLayout = () => {
   return (
-    <main className='3xl:h-screen container grid grid-cols-2 items-center justify-center gap-x-8 py-8'>
+    <main className='container grid grid-cols-2 items-center justify-center gap-x-8 py-8 3xl:h-screen'>
       <Outlet />
     </main>
   )

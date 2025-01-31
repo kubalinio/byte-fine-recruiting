@@ -26,7 +26,7 @@ const ModuleCanvas = () => {
   }, [elements, getElement, selectedElement?.id, setSelectedElement])
 
   return (
-    <div className='bg-background text-foreground relative z-0 col-span-1 flex size-full max-h-[60rem] grow items-center justify-center overflow-auto'>
+    <div className='relative z-0 col-span-1 flex size-full max-h-[60rem] grow items-center justify-center overflow-auto bg-background text-foreground'>
       <div className='absolute size-full'>
         <div
           key={elements[0]?.id}

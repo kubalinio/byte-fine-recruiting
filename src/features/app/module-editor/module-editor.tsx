@@ -58,7 +58,7 @@ const ModuleEditor = () => {
       <Typography
         as='p'
         variant='body-1'
-        className='text-black-100 bg-white-50 w-full rounded-[0.625rem] px-2.5 py-4 text-lg font-bold'
+        className='w-full rounded-[0.625rem] bg-white-50 px-2.5 py-4 text-lg font-bold text-black-100'
       >
         Add content
       </Typography>

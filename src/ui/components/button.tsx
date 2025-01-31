@@ -7,19 +7,19 @@ import { cva } from "class-variance-authority"
 import { cn } from "utils/cn"
 
 const buttonVariants = cva(
-  "focus-visible:ring-offset-primary-50 focus-visible:ring-primary-50 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[0.9375rem] font-semibold leading-6 transition-colors focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-offset-[-1px] disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[0.9375rem] font-semibold leading-6 transition-colors focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-primary-50 focus-visible:ring-offset-[-1px] focus-visible:ring-offset-primary-50 disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground focus-visible:bg-primary-50 disabled:bg-black-25 p-0 hover:bg-[#550788] focus-visible:ring ",
+          "bg-primary p-0 text-primary-foreground hover:bg-[#550788] focus-visible:bg-primary-50 focus-visible:ring disabled:bg-black-25 ",
         destructive:
-          "bg-background text-destructive hover:text-destructive/90 hover:border-destructive/90 border-destructive rounded-none border-b text-lg",
-        outline: "hover:text-black-100 hover:bg-white-50",
+          "rounded-none border-b border-destructive bg-background text-lg text-destructive hover:border-destructive/90 hover:text-destructive/90",
+        outline: "hover:bg-white-50 hover:text-black-100",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         action:
-          "bg-white-50 [&_svg]:text-black-75 hover:bg-white-25 size-full flex-col rounded-[0.625rem] focus-visible:ring-4 focus-visible:ring-inset disabled:opacity-25 [&_svg]:size-32"
+          "size-full flex-col rounded-[0.625rem] bg-white-50 hover:bg-white-25 focus-visible:ring-4 focus-visible:ring-inset disabled:opacity-25 [&_svg]:size-32 [&_svg]:text-black-75"
       },
       size: {
         default: "px-8 py-2",

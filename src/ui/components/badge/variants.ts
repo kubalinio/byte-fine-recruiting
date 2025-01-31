@@ -1,4 +1,6 @@
-import { cva, VariantProps } from "class-variance-authority"
+import type { VariantProps } from "class-variance-authority"
+
+import { cva } from "class-variance-authority"
 
 // Define the badge variants with proper TypeScript types
 export const badgeVariants = cva(

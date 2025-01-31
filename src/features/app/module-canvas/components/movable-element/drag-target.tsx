@@ -14,7 +14,7 @@ const DragTarget = {
       <Button
         key={"dimension-viewer"}
         className={
-          "moveable-dimension text-primary hover:bg-white-50 absolute -left-5 -top-5 z-[4003] rounded-full bg-white p-1"
+          "moveable-dimension absolute -left-5 -top-5 z-[4003] rounded-full bg-white p-1 text-primary hover:bg-white-50"
         }
       >
         <EditorMove />

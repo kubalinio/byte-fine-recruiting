@@ -64,7 +64,7 @@ const MovableElement = () => {
       origin={false}
       target={`#${selectedElement.id}`}
       container={null}
-      className='transformer [&_.moveable-line]:!bg-primary [&_.moveable-control]:!bg-primary fixed z-50 [&_.moveable-control]:!-ml-3 [&_.moveable-control]:!-mt-3 [&_.moveable-control]:!size-6 [&_.moveable-dimension]:!z-[3003]'
+      className='transformer fixed z-50 [&_.moveable-control]:!-ml-3 [&_.moveable-control]:!-mt-3 [&_.moveable-control]:!size-6 [&_.moveable-control]:!bg-primary [&_.moveable-dimension]:!z-[3003] [&_.moveable-line]:!bg-primary'
       edge={false}
       throttleDrag={0}
       keepRatio={false}

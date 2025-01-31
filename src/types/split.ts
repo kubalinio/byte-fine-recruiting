@@ -4,6 +4,6 @@ export type Split<
   Accumulator extends string = ""
 > = S extends `${infer Head}${infer Rest}`
   ? Head extends SplitBy
-    ? Accumulator | Split<Rest, SplitBy, "">
+    ? Accumulator | Split<Rest, SplitBy>
     : Split<Rest, SplitBy, `${Accumulator}${Head}`>
   : Accumulator
