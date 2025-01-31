@@ -58,7 +58,7 @@ const MovableElement = () => {
         changeColor: true,
         deleteElement: handleDelete,
         changeText: handleChangeText,
-        type: selectedElement.type
+        selectedElement: selectedElement
       }}
       originRelative={false}
       origin={false}

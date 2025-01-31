@@ -124,15 +124,16 @@ const TextareaField = ({
         <Textarea
           ref={textareaRef}
           rows={defaultRows}
+          style={{
+            cursor: element.contentEditable ? "text" : "auto",
+            color: element.style.color
+          }}
           className={cn(
             "size-full resize-none overflow-hidden bg-transparent text-3xl",
             {
               [`${element.style.color}`]: element.style.color
             }
           )}
-          style={{
-            cursor: element.contentEditable ? "text" : "auto"
-          }}
           onBlur={(e) => {
             handleBlurText(e, element)
           }}

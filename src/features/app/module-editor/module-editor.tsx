@@ -51,7 +51,7 @@ const ModuleEditor = () => {
 
   return (
     <div className='flex h-full max-h-[60rem] flex-col gap-y-8'>
-      <Header resetWorkspace={handleResetWorkspace} isEmpty={!isEmpty} />
+      <Header isEmpty={!isEmpty} resetWorkspace={handleResetWorkspace} />
 
       <Separator />
 

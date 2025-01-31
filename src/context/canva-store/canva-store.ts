@@ -97,7 +97,7 @@ const useCanvasStore = create<CanvasState>((set, get) => ({
         backgroundPosition: type === "background" ? "center" : "center",
         backgroundRepeat: type === "background" ? "no-repeat" : "repeat",
         background: "transparent",
-        color: '#353535',
+        color: "#353535",
         width: type === "background" ? "100%" : type === "text" ? "auto" : "10%",
         height: type === "background" ? "100%" : type === "text" ? "auto" : "20%",
         padding: type === "text" ? "0px" : "0px",

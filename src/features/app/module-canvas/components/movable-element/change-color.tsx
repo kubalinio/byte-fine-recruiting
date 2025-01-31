@@ -1,4 +1,5 @@
 import type { MoveableManagerInterface, Renderer } from "react-moveable"
+import type { Element } from "types/canvas-types"
 
 import { RadioGroup, RadioGroupItem } from "ui"
 import { cn } from "utils/cn"
@@ -7,26 +8,26 @@ const ChangeColor = {
   name: "changeColor",
   props: ["type"],
   events: [],
-  render(moveable: MoveableManagerInterface<any, any>, React: Renderer) {
-    const props = moveable.props as {
+  render(moveable: MoveableManagerInterface<any, any>, _React: Renderer) {
+    const { changeText, selectedElement } = moveable.props as {
       changeText?: (value: string) => void
-      type?: string
+      selectedElement?: Element
     }
     const { origin } = moveable.state
 
     const colors = [
-      { value: "text-black-100", label: "Black", color: "bg-black-100" },
-      { value: "text-white", label: "White", color: "bg-white" },
-      { value: "text-[#CF0000]", label: "Red", color: "bg-[#CF0000]" },
-      { value: "text-[#0055FF]", label: "Blue", color: "bg-[#0055FF]" },
-      { value: "text-[#00DA16]", label: "Green", color: "bg-[#00DA16]" }
+      { value: "#353535", label: "Black" },
+      { value: "#ffffff", label: "White" },
+      { value: "#CF0000", label: "Red" },
+      { value: "#0055FF", label: "Blue" },
+      { value: "#00DA16", label: "Green" }
     ]
 
     const handleChangeColor = (value: string) => {
-      props.changeText?.(value)
+      changeText?.(value)
     }
 
-    if (props.type === "image") return null
+    if (selectedElement?.type === "image") return null
     return (
       <fieldset
         key='change-color'
@@ -37,7 +38,8 @@ const ChangeColor = {
       >
         <RadioGroup
           className='flex gap-2 bg-transparent'
-          defaultValue='text-black-100'
+          defaultValue={selectedElement?.style.color}
+          value={selectedElement?.style.color}
           onValueChange={handleChangeColor}
         >
           {colors.map((item) => (
@@ -48,12 +50,12 @@ const ChangeColor = {
               <RadioGroupItem
                 value={item.value}
                 id={`change-color-${item.value}`}
+                style={{
+                  backgroundColor: item.value
+                }}
                 className={cn(
                   "size-6 cursor-pointer rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
-                  "data-[state=checked]:outline data-[state=checked]:outline-2 data-[state=checked]:outline-offset-2 data-[state=checked]:outline-white [&>span]:opacity-0",
-                  {
-                    [item.color]: item.color
-                  }
+                  "data-[state=checked]:outline data-[state=checked]:outline-2 data-[state=checked]:outline-offset-2 data-[state=checked]:outline-white [&>span]:opacity-0"
                 )}
               />
             </div>

@@ -1,13 +1,14 @@
-import { Reset } from "assets/icons"
 import { Logo } from "features/shared/components/logo"
-import { Button, Typography } from "ui"
+import { Typography } from "ui"
+
+import { ResetAlert } from "./reset-alert"
 
 type HeaderProps = {
-  resetWorkspace: () => void
   isEmpty: boolean
+  resetWorkspace: () => void
 }
 
-const Header = ({ resetWorkspace, isEmpty }: HeaderProps) => {
+const Header = ({ isEmpty, resetWorkspace }: HeaderProps) => {
   return (
     <header className='flex items-center justify-between'>
       <span className='flex items-center gap-2'>
@@ -18,16 +19,7 @@ const Header = ({ resetWorkspace, isEmpty }: HeaderProps) => {
         </Typography>
       </span>
 
-      <Button
-        disabled={isEmpty}
-        variant='destructive'
-        className='p-0'
-        onClick={resetWorkspace}
-      >
-        <span>Reset</span>
-
-        <Reset />
-      </Button>
+      <ResetAlert disabled={isEmpty} onConfirm={resetWorkspace} />
     </header>
   )
 }
