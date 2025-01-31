@@ -24,10 +24,10 @@ const ModuleEditor = () => {
 
     try {
       const dataUrl = await htmlToImage.toPng(node, {
-        width: 1080,
-        height: 1350,
+        // width: 1080,
+        // height: 1350,
         pixelRatio: 1,
-        skipAutoScale: true,
+        skipAutoScale: false,
         filter: (node) => {
           if (node.tagName === "LINK") return false
           if (node.tagName === "IMG") {
@@ -58,7 +58,7 @@ const ModuleEditor = () => {
       <Typography
         as='p'
         variant='body-1'
-        className='w-full rounded-[0.625rem] bg-white-50 px-2.5 py-4 text-lg font-bold text-black-100'
+        className='bg-white-50 text-black-100 w-full rounded-[0.625rem] px-2.5 py-4 text-lg font-bold'
       >
         Add content
       </Typography>
