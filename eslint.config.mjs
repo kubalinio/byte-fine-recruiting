@@ -12,7 +12,13 @@ import tailwindPlugin from 'eslint-plugin-tailwindcss'
 
 const config = [
   {
-    ignores: [".next", ".astro", "dist", "storybook-static"]
+    ignores: [
+      ".next",
+      ".astro",
+      "dist",
+      "storybook-static",
+      "**/routeTree.gen.ts"
+    ]
   },
 
   // React configs
@@ -27,7 +33,13 @@ const config = [
       ...reactPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       ...jsxA11yPlugin.configs.strict.rules,
-      ...tailwindPlugin.configs.recommended.rules
+      ...tailwindPlugin.configs.recommended.rules,
+      "tailwindcss/classnames-order": "warn",
+      "tailwindcss/enforces-negative-arbitrary-values": "warn",
+      "tailwindcss/enforces-shorthand": "warn",
+      "tailwindcss/migration-from-tailwind-2": "warn",
+      "tailwindcss/no-arbitrary-value": "off",
+      "tailwindcss/no-contradicting-classname": "error"
     }
   },
 
@@ -73,7 +85,10 @@ const config = [
     },
     settings: {
       tailwindcss: {
-        callees: ["classnames", "clsx", "ctl", "cn", "cva"]
+        callees: ["classnames", "clsx", "ctl", "cn", "cva"],
+        config: "./tailwind.config.ts",
+        removeDuplicates: true,
+        classRegex: "^class(Name)?$"
       },
       react: {
         version: "detect"

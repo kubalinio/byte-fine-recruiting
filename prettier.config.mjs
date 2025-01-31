@@ -9,6 +9,7 @@ const config = {
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-packagejson",
+    "prettier-plugin-tailwindcss"
   ],
   bracketSpacing: true,
   bracketSameLine: false,
@@ -37,6 +38,7 @@ const config = {
   ],
   importOrderTypeScriptVersion: "5.4.5",
   tailwindConfig: "./tailwind.config.ts",
+  tailwindFunctions: ["clsx", "cn", "cva"],
 };
 
 export default config;
