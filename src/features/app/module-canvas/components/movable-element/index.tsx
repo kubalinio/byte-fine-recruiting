@@ -1,14 +1,14 @@
 import * as React from "react"
 
 import type { OnDrag, OnDragEnd } from "react-moveable"
-import type { Element } from "types/canvas-types"
 
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
-import { DeleteField } from "features/app/module-canvas/components/movable-element/delete-field"
 import Moveable from "react-moveable"
 import { useShallow } from "zustand/react/shallow"
 
+import { ChangeColor } from "../change-color"
 import { CustomOrigin } from "./custom-origin"
+import { DeleteField } from "./delete-field"
 import { DragTarget } from "./drag-target"
 
 interface MovableElementProps {
@@ -84,19 +84,20 @@ const MovableElement = ({ canvasRef }: MovableElementProps) => {
   return (
     <Moveable
       snappable={true}
-      ables={[DragTarget, CustomOrigin, DeleteField]}
+      ables={[DragTarget, CustomOrigin, DeleteField, ChangeColor]}
       dragTarget={dragTarget}
       props={{
         dimensionViewable: true,
         customOrigin: true,
         deleteField: true,
+        changeColor: true,
         deleteElement: handleDelete
       }}
       originRelative={false}
       origin={false}
       target={`#${selectedElement.id}`}
       container={null}
-      className='transformer fixed z-50 [&_.moveable-dimension]:!z-[3003] [&_.moveable-line]:!bg-primary'
+      className='transformer [&_.moveable-line]:!bg-primary fixed z-50 [&_.moveable-dimension]:!z-[3003]'
       edge={true}
       throttleDrag={0}
       keepRatio={false}

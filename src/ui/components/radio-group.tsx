@@ -3,7 +3,6 @@
 import * as React from "react"
 
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
-import { Circle } from "lucide-react"
 import { cn } from "utils/cn"
 
 const RadioGroup = React.forwardRef<
@@ -12,7 +11,7 @@ const RadioGroup = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
-      className={cn("grid gap-2", className)}
+      className={cn("grid gap-3", className)}
       {...props}
       ref={ref}
     />
@@ -28,13 +27,21 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "aspect-square size-6 rounded-full border border-ring text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "border-input focus-visible:outline-ring/70 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground aspect-square size-4 rounded-full border shadow-sm shadow-black/5 outline-offset-2 focus-visible:outline focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator className='flex items-center justify-center'>
-        <Circle className='size-4 fill-current text-current' />
+      <RadioGroupPrimitive.Indicator className='flex items-center justify-center text-current'>
+        <svg
+          width='6'
+          height='6'
+          viewBox='0 0 6 6'
+          fill='currentcolor'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <circle cx='3' cy='3' r='3' />
+        </svg>
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )

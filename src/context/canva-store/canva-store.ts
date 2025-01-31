@@ -106,7 +106,7 @@ const useCanvasStore = create<CanvasState>((set, get) => ({
         width: type === "background" ? "100%" : type === "text" ? "auto" : "10%",
         height: type === "background" ? "100%" : type === "text" ? "auto" : "20%",
         padding: type === "text" ? "0px" : "0px",
-        fontSize: (Math.random()*80+10) + "px",
+        fontSize: String(Math.random()*80+10) + "px",
         fontWeight: (Math.random()*900),
         fontFamily: "Poppins",
         zIndex: type === "background" ? "0" : "1"

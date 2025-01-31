@@ -7,6 +7,7 @@ import type { Element } from "types/canvas-types"
 
 import { Trash } from "assets/icons"
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
+import { ChangeColor } from "features/app/module-canvas/components/change-color"
 import { Button, Textarea } from "ui"
 import { cn } from "utils/cn"
 import { useShallow } from "zustand/react/shallow"
@@ -30,21 +31,6 @@ const TextareaField = ({
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const defaultRows = 2
   const maxRows = undefined
-
-  // const handleTextClicked = (targetElement: Element) => {
-  //   const newElements = elements.map((element) => {
-  //     if (element.id === targetElement.id) {
-  //       return {
-  //         ...element,
-  //         contentEditable: !targetElement.contentEditable
-  //       }
-  //     } else {
-  //       return element
-  //     }
-  //   })
-  //   setElements(newElements)
-  //   // recordChange()
-  // }
 
   const handleTextChange = (e: React.ChangeEvent, element: Element) => {
     const textarea = e.target as HTMLTextAreaElement
@@ -83,23 +69,22 @@ const TextareaField = ({
     setElements(newElements)
   }
 
-  const toggleEditable = (id: string) => {
-    const element = document.getElementById(id)
-    if (!element) {
-      return null
-    }
+  const handleChangeColor = (value: string) => {
+    const newElements = elements.map((elmnt) => {
+      if (elmnt?.id == element.id) {
+        return {
+          ...element,
+          style: {
+            ...element.style,
+            color: value
+          }
+        }
+      } else {
+        return elmnt
+      }
+    })
 
-    element.contentEditable = "true"
-
-    // console.log("got the element . toggle editable")
-    // if (element.isContentEditable){
-    //   element.contentEditable  = "false"
-    //   element.style.cursor = "auto"
-    // }
-    // else {
-    //   element.contentEditable = "true"
-    //   element.style.cursor = "text"
-    // }
+    setElements(newElements)
   }
 
   const handleBlurText = (
@@ -124,8 +109,6 @@ const TextareaField = ({
 
     setElements(newElements)
   }
-
-  // console.log("element", element)
 
   return (
     <div
@@ -161,7 +144,12 @@ const TextareaField = ({
       <Textarea
         ref={textareaRef}
         rows={defaultRows}
-        className='size-full resize-none overflow-hidden bg-transparent text-3xl'
+        className={cn(
+          "size-full resize-none overflow-hidden bg-transparent text-3xl",
+          {
+            [`${element.style.color}`]: element.style.color
+          }
+        )}
         style={{
           cursor: element.contentEditable ? "text" : "auto"
         }}
@@ -190,6 +178,10 @@ const TextareaField = ({
           <small>{element.parameter?.name}</small>
         </div>
       ) : null}
+
+      {selectedElement && selectedElement.id == element.id && (
+        <ChangeColor onChange={handleChangeColor} />
+      )}
     </div>
   )
 }

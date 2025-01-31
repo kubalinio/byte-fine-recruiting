@@ -45,7 +45,7 @@ const ModuleCanvas = () => {
           ref={canvasRef}
         >
           {/* <Moveable target={canvasRef} /> */}
-          <div className='pointer-events-none absolute inset-0 z-50 size-full' />
+          {/* <div className='pointer-events-none absolute inset-0 z-50 size-full' /> */}
 
           {elements.length === 1 &&
           elements[0]?.type === "frame" &&

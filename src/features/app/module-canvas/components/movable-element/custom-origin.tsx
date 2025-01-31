@@ -10,7 +10,7 @@ const CustomOrigin = {
     return (
       <div
         key='custom-origin'
-        className='moveable-custom-origin absolute z-50 size-6 rounded-full border-4 border-white bg-primary'
+        className='moveable-custom-origin bg-primary absolute z-50 size-6 rounded-full border-4 border-white'
         style={{
           transform:
             `translate(-50%, -50%)` +

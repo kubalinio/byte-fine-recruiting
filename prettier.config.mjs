@@ -9,7 +9,6 @@ const config = {
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-packagejson",
-    "prettier-plugin-tailwindcss",
   ],
   bracketSpacing: true,
   bracketSameLine: false,
