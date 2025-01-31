@@ -21,10 +21,13 @@ const ChangeColor = ({ onChange }: ChangeColorProps) => {
   }
 
   return (
-    <fieldset key='change-color' className='absolute left-0 top-full py-2'>
+    <fieldset
+      key='change-color'
+      className='absolute left-0 top-full !scale-100 py-2'
+    >
       <RadioGroup
         className='flex gap-2 bg-transparent'
-        defaultValue='text-white'
+        defaultValue='text-black-100'
         onValueChange={handleChangeColor}
       >
         {colors.map((item) => (

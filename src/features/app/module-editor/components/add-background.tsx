@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react"
 
 import type { ChangeEvent } from "react"
+import type { Element } from "types/canvas-types"
 
 import { EditorBg } from "assets/icons"
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
 import { useShallow } from "zustand/react/shallow"
 
-import { ActionButtonUpload } from "../ui/action-button"
+import { ActionButtonUpload } from "./action-button"
 
 const AddBackground = () => {
   const { elements, setElements } = useCanvasStore(useShallow(CanvasSelector))
   const previousObjectUrl = useRef<string | null>(null)
 
-  // Cleanup previous object URL when component unmounts or when a new image is uploaded
   useEffect(() => {
     return () => {
       if (previousObjectUrl.current) {
@@ -30,23 +30,21 @@ const AddBackground = () => {
     }
 
     try {
-      // Clean up previous object URL if it exists
       if (previousObjectUrl.current) {
         URL.revokeObjectURL(previousObjectUrl.current)
         previousObjectUrl.current = null
       }
 
-      // Create object URL for the new image
       const objectUrl = URL.createObjectURL(file)
       previousObjectUrl.current = objectUrl
 
-      // Update the frame element (which is always the first element)
       const newElements = elements.map((element, index) => {
         if (index === 0) {
           return {
             ...element,
+            type: "background",
             style: {
-              ...element.style,
+              ...element?.style,
               backgroundImage: `url(${objectUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -58,9 +56,8 @@ const AddBackground = () => {
         return element
       })
 
-      setElements(newElements)
+      setElements(newElements as Element[])
     } catch (error) {
-      // Reset the previous object URL if there was an error
       if (previousObjectUrl.current) {
         URL.revokeObjectURL(previousObjectUrl.current)
         previousObjectUrl.current = null

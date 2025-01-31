@@ -33,6 +33,11 @@ const ActionButtonUpload = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.onUpload(e)
+
+    // Clear the input value after upload
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""
+    }
   }
 
   const handleThumbnailClick = React.useCallback(() => {

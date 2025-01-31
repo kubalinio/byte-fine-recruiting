@@ -42,12 +42,9 @@ const CreateComponents = ({ element }: { element: Element }) => {
           }}
           style={{
             ...element.style,
+            position: "absolute",
             display: element.visible ? "block" : "none",
-            backgroundImage: `url(${element.imgSrc})`,
-            backgroundSize: "contain",
             overflow: "hidden",
-
-            // Remove width and height from inline style
             width: element.style.width,
             height: element.style.height
           }}
@@ -60,7 +57,7 @@ const CreateComponents = ({ element }: { element: Element }) => {
               height: "100%"
             }}
             src={element.imgSrc}
-            alt='image'
+            alt='canvas-image'
           />
         </div>
       )

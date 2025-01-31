@@ -1,6 +1,6 @@
 import { EditorText } from "assets/icons"
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
-import { ActionButton } from "features/app/module-editor/ui/action-button"
+import { ActionButton } from "features/app/module-editor/components/action-button"
 import { useShallow } from "zustand/react/shallow"
 
 const AddText = () => {

@@ -7,34 +7,51 @@ import { Box, Button, Separator, Typography } from "ui"
 import { useShallow } from "zustand/react/shallow"
 
 import { AddBackground } from "./components/add-background"
-import { Header } from "./ui/header"
+import { Header } from "./components/header"
 
 const ModuleEditor = () => {
-  const { selectedElement, setSelectedElement } = useCanvasStore(
+  const { setSelectedElement, resetWorkspace, elements } = useCanvasStore(
     useShallow(CanvasSelector)
   )
 
-  const handleImageDownload = () => {
+  const isEmpty = elements.filter((el) => el?.type !== "frame").length > 0
+
+  const handleImageDownload = async () => {
     setSelectedElement(null)
 
     const node = document.getElementById("canvas")
     if (!node) return
 
-    htmlToImage
-      .toPng(node)
-      .then(function (dataUrl) {
-        const img = new Image()
-        img.src = dataUrl
-        download(dataUrl, "my-node.png")
+    try {
+      const dataUrl = await htmlToImage.toPng(node, {
+        width: 1080,
+        height: 1350,
+        pixelRatio: 1,
+        skipAutoScale: true,
+        filter: (node) => {
+          if (node.tagName === "LINK") return false
+          if (node.tagName === "IMG") {
+            const src = node.getAttribute("src") ?? ""
+            return !src.startsWith("http")
+          }
+          return true
+        },
+        fontEmbedCSS: ""
       })
-      .catch(function (error) {
-        console.error("oops, something went wrong!", error)
-      })
+
+      download(dataUrl, "poster-1.png")
+    } catch (error) {
+      console.error("Failed to generate image:", error)
+    }
+  }
+
+  const handleResetWorkspace = () => {
+    resetWorkspace()
   }
 
   return (
-    <div className='flex h-full flex-col gap-y-8'>
-      <Header />
+    <div className='flex h-full max-h-[60rem] flex-col gap-y-8'>
+      <Header resetWorkspace={handleResetWorkspace} isEmpty={!isEmpty} />
 
       <Separator />
 
@@ -43,7 +60,7 @@ const ModuleEditor = () => {
         variant='body-1'
         className='text-black-100 bg-white-50 w-full rounded-[0.625rem] px-2.5 py-4 text-lg font-bold'
       >
-        Background
+        Add content
       </Typography>
 
       <Box className='grid grid-cols-2 gap-8'>
@@ -54,7 +71,11 @@ const ModuleEditor = () => {
         <AddBackground />
       </Box>
 
-      <Button className='mt-auto self-end' onClick={handleImageDownload}>
+      <Button
+        className='mt-auto self-end'
+        disabled={!isEmpty}
+        onClick={handleImageDownload}
+      >
         Export to PNG
       </Button>
     </div>

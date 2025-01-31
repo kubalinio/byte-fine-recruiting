@@ -9,7 +9,7 @@ const DeleteField = {
   events: [],
   render(moveable: MoveableManagerInterface<any, any>, React: Renderer) {
     const props = moveable.props as { deleteElement?: () => void }
-    const { contentWidth, contentHeight, ...rest } = moveable.state
+    const { origin } = moveable.state
 
     const handleDelete = (e: React.MouseEvent) => {
       e.stopPropagation()
@@ -21,8 +21,7 @@ const DeleteField = {
         key='delete-button'
         className='text-destructive hover:bg-white-50 absolute -right-0 z-[3002] size-fit rounded-full bg-white p-1'
         style={{
-          transform:
-            `translate(45%, -50%)` + `translateX(${contentWidth / 1}px)`
+          transform: `translate(45%, -50%)` + `translateX(${origin[0] * 2}px)`
         }}
         onClick={handleDelete}
       >

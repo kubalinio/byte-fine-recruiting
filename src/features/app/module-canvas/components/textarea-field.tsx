@@ -5,10 +5,8 @@ import { useRef } from "react"
 
 import type { Element } from "types/canvas-types"
 
-import { Trash } from "assets/icons"
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
-import { ChangeColor } from "features/app/module-canvas/components/change-color"
-import { Button, Textarea } from "ui"
+import { Textarea } from "ui"
 import { cn } from "utils/cn"
 import { useShallow } from "zustand/react/shallow"
 
@@ -52,11 +50,11 @@ const TextareaField = ({
     textarea.style.height = `${newHeight}px`
 
     const newElements = elements.map((elmnt) => {
-      if (elmnt.id == element.id) {
+      if (elmnt?.id == element?.id) {
         return {
           ...element,
           style: {
-            ...element.style,
+            ...element?.style,
             minHeight: `${newHeight}px`
           },
           text: textarea.value
@@ -66,25 +64,7 @@ const TextareaField = ({
       }
     })
 
-    setElements(newElements)
-  }
-
-  const handleChangeColor = (value: string) => {
-    const newElements = elements.map((elmnt) => {
-      if (elmnt?.id == element.id) {
-        return {
-          ...element,
-          style: {
-            ...element.style,
-            color: value
-          }
-        }
-      } else {
-        return elmnt
-      }
-    })
-
-    setElements(newElements)
+    setElements(newElements as Element[])
   }
 
   const handleBlurText = (
@@ -94,7 +74,7 @@ const TextareaField = ({
     e.currentTarget.contentEditable = "false"
 
     const newElements = elements.map((elmnt) => {
-      if (elmnt.id == element.id) {
+      if (elmnt?.id == element?.id) {
         return {
           ...element,
           text:
@@ -107,82 +87,76 @@ const TextareaField = ({
       }
     })
 
-    setElements(newElements)
+    setElements(newElements as Element[])
   }
 
   return (
-    <div
-      key={element.id}
-      id={element.id}
-      data-active={textareaRef.current?.contains(document.activeElement)}
-      onClick={(e) => {
-        handleElementClick(e, {
-          ...element
-        })
-      }}
-      style={{
-        ...element.style,
-        display: element.visible ? "flex" : "none",
-        flexDirection: "row", // or "column", depending on your layout
-        flexWrap: "wrap", // allows the content to wrap
-        whiteSpace: "normal", // allows text to wrap normally
-        wordBreak: "break-word", // breaks long words to fit within the container
-        fontSize: "32px",
-        lineHeight: "1", // or any other value suitable for your design
-        // overflow: "hidden", // hides overflow content
-        // textOverflow: "ellipsis", // adds ellipsis for overflow text
-        msTextAutospace: "ideograph-parenthesis",
-        minHeight: "fit",
-        minWidth: "fit",
-        cursor: element.contentEditable ? "text" : "cell",
-        zIndex: 3000
-      }}
-      className={cn("group", {
-        "outline-dashed outline-[rgba(177,115,201,0.4)]": element.isParametrized
-      })}
-    >
-      <Textarea
-        ref={textareaRef}
-        rows={defaultRows}
-        className={cn(
-          "size-full resize-none overflow-hidden bg-transparent text-3xl",
-          {
-            [`${element.style.color}`]: element.style.color
-          }
-        )}
+    <>
+      <div
+        key={element.id}
+        id={element.id}
+        data-active={textareaRef.current?.contains(document.activeElement)}
+        onClick={(e) => {
+          handleElementClick(e, {
+            ...element
+          })
+        }}
         style={{
-          cursor: element.contentEditable ? "text" : "auto"
+          ...element.style,
+          display: element.visible ? "flex" : "none",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          whiteSpace: "normal",
+          wordBreak: "break-word",
+          fontSize: "32px",
+          lineHeight: "1",
+          msTextAutospace: "ideograph-parenthesis",
+          minHeight: "fit",
+          minWidth: "fit",
+          cursor: element.contentEditable ? "text" : "cell",
+          zIndex: 3000
         }}
-        onBlur={(e) => {
-          handleBlurText(e, element)
-        }}
-        contentEditable={element.contentEditable}
-        // onDoubleClick={(e) => {
-        //   handleTextClicked(element)
-        // }}
-        placeholder={
-          element.text === "Type your text here" ? element.text : undefined
-        }
-        defaultValue={
-          element.text !== "Type your text here" ? element.text : ""
-        }
-        onChange={(e) => {
-          handleTextChange(e, element)
-        }}
-      />
+        className={cn("group", {
+          "outline-dashed outline-[rgba(177,115,201,0.4)]":
+            element.isParametrized
+        })}
+      >
+        <Textarea
+          ref={textareaRef}
+          rows={defaultRows}
+          className={cn(
+            "size-full resize-none overflow-hidden bg-transparent text-3xl",
+            {
+              [`${element.style.color}`]: element.style.color
+            }
+          )}
+          style={{
+            cursor: element.contentEditable ? "text" : "auto"
+          }}
+          onBlur={(e) => {
+            handleBlurText(e, element)
+          }}
+          contentEditable={element.contentEditable}
+          placeholder={
+            element.text === "Type your text here" ? element.text : undefined
+          }
+          defaultValue={
+            element.text !== "Type your text here" ? element.text : ""
+          }
+          onChange={(e) => {
+            handleTextChange(e, element)
+          }}
+        />
 
-      {element.isParametrized &&
-      selectedElement &&
-      element.id == selectedElement.id ? (
-        <div className='absolute right-0 top-0 z-50 h-[5vh] rounded-sm rounded-bl-xl bg-black px-4 font-mono text-2xl font-bold text-[#bfb4da]'>
-          <small>{element.parameter?.name}</small>
-        </div>
-      ) : null}
-
-      {selectedElement && selectedElement.id == element.id && (
-        <ChangeColor onChange={handleChangeColor} />
-      )}
-    </div>
+        {element.isParametrized &&
+        selectedElement &&
+        element.id == selectedElement.id ? (
+          <div className='absolute right-0 top-0 z-50 h-[5vh] rounded-sm rounded-bl-xl bg-black px-4 font-mono text-2xl font-bold text-[#bfb4da]'>
+            <small>{element.parameter?.name}</small>
+          </div>
+        ) : null}
+      </div>
+    </>
   )
 }
 
