@@ -17,7 +17,8 @@ if (import.meta.env.DEV) {
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",
-  defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />
+  defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
+  scrollRestoration: true
 })
 
 declare module "@tanstack/react-router" {

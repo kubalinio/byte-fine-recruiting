@@ -1,9 +1,9 @@
-import {
-  Link as RouterLink,
-  LinkProps as RouterLinkProps
-} from "@tanstack/react-router"
+import { Link as RouterLink } from "@tanstack/react-router"
 
-import { ButtonProps, buttonVariants } from "ui"
+import type { LinkProps as RouterLinkProps } from "@tanstack/react-router"
+import type { ButtonProps } from "ui"
+
+import { buttonVariants } from "ui"
 import { cn } from "utils/cn"
 
 type LinkProps = {
@@ -17,11 +17,9 @@ const Link = ({
   variant = "link",
   ...props
 }: LinkProps) => {
-  const { button } = buttonVariants()
-
   return (
     <RouterLink
-      className={button({
+      className={buttonVariants({
         variant,
         className: cn(
           "h-fit py-0 pr-0 underline-offset-4 hover:underline",
