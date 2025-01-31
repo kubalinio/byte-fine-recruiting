@@ -1,4 +1,4 @@
-export interface Element {
+export type Element = {
   id: string
   parameter?: { name?: string; value?: string }
   isParametrized: boolean
@@ -9,6 +9,6 @@ export interface Element {
   visible: boolean
   locked: boolean
   contentEditable: boolean
-}
+} | null
 
 export type ElementType = "image" | "text" | "background" | "frame"

@@ -12,6 +12,7 @@ const storedDiagram =
 const initialElements = [
   {
     id: "g9g6ljxhj",
+    active: false,
     type: "frame",
     style: {
       position: "relative",
@@ -36,6 +37,7 @@ export type CanvasState = {
   elements: Element[];
   setElements: (newElements: Element[]) => void;
   createElement: (element: Element) => void;
+  deleteElement: (elementId: string) => void;
   addElement: (type: ElementType) => Element;
   getElement: (elementId: string) => Element | undefined;
   selectedElement: Element;
@@ -44,20 +46,21 @@ export type CanvasState = {
 
 const useCanvasStore = create<CanvasState>((set, get) => ({
   elements: (storedDiagram ? JSON.parse(storedDiagram) : initialElements) as Element[],
-  selectedElement: {} as Element,
+  selectedElement: null as Element | null,
   isRecordable: true,
   isUndoable: false,
   isRedoable: false,
   setElements: (newElements: Element[]) => { set({ elements: newElements }); },
 
-  getElement: (elementId: string) => get().elements.find((elm) => elm.id === elementId)!,
+  getElement: (elementId: string) => get().elements.find((elm) => elm?.id === elementId)!,
 
   createElement: (newElement: Element) => {
-    const existingElement = get().getElement(newElement.id);
+    const existingElement = get().getElement(newElement?.id ?? "");
+
     if (existingElement) {
       console.warn("an element already exists. overriding the element");
       get().elements.map((element: Element, index) => {
-        if (element.id === newElement.id) {
+        if (element?.id === newElement?.id) {
           get().elements[index] = newElement;
         }
       });
@@ -66,13 +69,19 @@ const useCanvasStore = create<CanvasState>((set, get) => ({
     }
   },
 
+  deleteElement: (elementId: string) => {
+    const newElements = get().elements.filter(el => el?.id !== elementId);
+    get().setElements(newElements);
+    set({ selectedElement: null });
+  },
+
   setSelectedElement: (element: Element) => { set({ selectedElement: element }); },
 
   addElement: (type: ElementType) => {
     const newElement: Element = {
       id: `${type}-${generateId()}`,
       type: type,
-      text: type === "text" ? "Double click to edit" : "",
+      text: type === "text" ? "Type your text here" : "",
       visible: true,
       locked: type === "background",  // Lock background elements by default
       isParametrized: false,
@@ -80,8 +89,11 @@ const useCanvasStore = create<CanvasState>((set, get) => ({
       style: {
         position: type === "background" ? "absolute" : "absolute",
         display: 'flex',
+        alignItems: type === "text" ? "center" : "auto",
+        justifyContent: type === "text" ? "center" : "auto",
         left: type === "background" ? "0" : "50%",
         top: type === "background" ? "0" : "50%",
+        transform: type === "background" ? "" : "translate(-5%, -50%)",
         border: 'none',
         resize: type === "background" ? "none" : "none",
         overflow: 'visible',
@@ -93,7 +105,7 @@ const useCanvasStore = create<CanvasState>((set, get) => ({
         color: 'rgba(200,200,200,1)',
         width: type === "background" ? "100%" : type === "text" ? "auto" : "10%",
         height: type === "background" ? "100%" : type === "text" ? "auto" : "20%",
-        padding: type === "text" ? "24px" : "0px",
+        padding: type === "text" ? "0px" : "0px",
         fontSize: (Math.random()*80+10) + "px",
         fontWeight: (Math.random()*900),
         fontFamily: "Poppins",
@@ -103,7 +115,7 @@ const useCanvasStore = create<CanvasState>((set, get) => ({
 
     // For background type, replace any existing background elements
     if (type === "background") {
-      const newElements = get().elements.filter(el => el.type !== "background");
+      const newElements = get().elements.filter(el => el?.type !== "background");
       get().setElements([...newElements, newElement]);
     } else {
       get().setElements([...get().elements, newElement]);
@@ -117,6 +129,7 @@ export const CanvasSelector = (state: CanvasState) => ({
   elements: state.elements,
   setElements: state.setElements,
   createElement: state.createElement,
+  deleteElement: state.deleteElement,
   addElement: state.addElement,
   getElement: state.getElement,
   selectedElement: state.selectedElement,
