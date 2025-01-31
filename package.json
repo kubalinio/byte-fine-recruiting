@@ -9,6 +9,7 @@
     "build:analyze": "cross-env ANALYZE=1 npm run build",
     "build:ci": "cross-env VITE_CI=1 vite build",
     "coverage": "vitest run --coverage",
+    "dev": "vite",
     "e2e": "cd e2e && npm run test && cd ..",
     "e2e:chrome": "cd e2e && npm run test:chrome && cd ..",
     "e2e:debug": "cd e2e && npm run test:debug && cd ..",
