@@ -10,7 +10,11 @@ type ActionButtonProps = ButtonProps & {
 
 const ActionButton = ({ children, ...props }: ActionButtonProps) => {
   return (
-    <Button variant='action' {...props}>
+    <Button
+      variant='action'
+      className='relative py-16 [&>span]:absolute [&>span]:bottom-6'
+      {...props}
+    >
       {children}
     </Button>
   )
@@ -57,7 +61,7 @@ const ActionButtonUpload = ({
 
       <Button
         variant='action'
-        className='peer-disabled:cursor-not-allowed peer-disabled:opacity-25'
+        className='relative py-12 peer-disabled:cursor-not-allowed peer-disabled:opacity-25 2xl:py-16 [&>span]:absolute [&>span]:bottom-6'
         tabIndex={0}
         onClick={handleThumbnailClick}
         aria-label={props["aria-label"] ?? "Upload file"}

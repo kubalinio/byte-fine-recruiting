@@ -29,18 +29,18 @@ const ResetAlert = ({ onConfirm, disabled }: ResetAlertProps) => {
       </AlertDialogTrigger>
 
       <AlertDialogContent>
-        <AlertDialogHeader className='items-center'>
+        <AlertDialogHeader className='mx-auto max-w-96 items-center'>
           <AlertDialogCancel className='absolute right-8 top-8 lg:px-2'>
             <Close className='size-8' />
           </AlertDialogCancel>
 
           <Alert className='text-destructive mx-auto size-72' />
 
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Warning</AlertDialogTitle>
 
           <AlertDialogDescription>
-            Take a moment to review the details provided to ensure you
-            understand the implications.
+            You&apos;re about to reset whole process. Are you sure you want to
+            do it?
           </AlertDialogDescription>
         </AlertDialogHeader>
 
