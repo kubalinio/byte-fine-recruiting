@@ -4,11 +4,12 @@
 import * as React from "react"
 
 import { CanvasSelector, useCanvasStore } from "context/canva-store"
+import { Box } from "ui"
 import { useShallow } from "zustand/react/shallow"
 
 import { CanvasSkeleton } from "./components/canvas-skeleton"
-import CreateComponents from "./components/create-component"
-import MovableElement from "./components/movable-element/movable-element"
+import { CreateComponents } from "./components/create-component/create-component"
+import { MovableElement } from "./components/movable-element/movable-element"
 
 const ModuleCanvas = () => {
   const { selectedElement, setSelectedElement, elements, getElement } =
@@ -26,8 +27,8 @@ const ModuleCanvas = () => {
   }, [elements, getElement, selectedElement?.id, setSelectedElement])
 
   return (
-    <div className='bg-background text-foreground relative z-0 col-span-1 flex size-full max-h-[60rem] grow items-center justify-center overflow-auto'>
-      <div className='absolute size-full'>
+    <Box className='relative z-0 col-span-1 flex size-full max-h-[60rem] grow items-start justify-start overflow-auto bg-background text-foreground'>
+      <div className='absolute inset-0 top-1/2 aspect-[4/5] -translate-y-1/2'>
         <div
           key={elements[0]?.id}
           id='canvas'
@@ -57,7 +58,7 @@ const ModuleCanvas = () => {
           {selectedElement?.id && !selectedElement.locked && <MovableElement />}
         </div>
       </div>
-    </div>
+    </Box>
   )
 }
 

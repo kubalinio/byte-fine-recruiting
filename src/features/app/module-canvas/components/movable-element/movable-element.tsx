@@ -95,4 +95,4 @@ const MovableElement = () => {
   )
 }
 
-export default MovableElement
+export { MovableElement }

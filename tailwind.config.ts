@@ -1,15 +1,14 @@
 // import { join } from "path"
 
 // import animatePlugin from 'tailwindcss-animate';
-import defaultTheme from "tailwindcss/defaultTheme"
 
 import type { Config } from "tailwindcss"
 
+import defaultTheme from "tailwindcss/defaultTheme"
+
 // /** @type {import('tailwindcss').Config} */
 const config: Config = {
-  content: [
-    "./src/**/*.{ts,tsx,html}"
-  ],
+  content: ["./src/**/*.{ts,tsx,html}"],
   theme: {
     screens: {
       sm: "576px",
@@ -43,9 +42,9 @@ const config: Config = {
       screens: {
         sm: "540px",
         md: "768px",
-        lg: "960px",
-        xl: "1140px",
-        "2xl": "1400px"
+        lg: "1080px",
+        xl: "1320px",
+        "2xl": "1572px"
       }
     },
     extend: {
@@ -61,15 +60,14 @@ const config: Config = {
         "primary-foreground": "hsl(var(--primary-foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          50: "#7209b780",
-
+          50: "#7209b780"
         },
         black: {
           DEFAULT: "#000000",
           25: "#CDCDCD",
           50: "#353535",
           75: "#676767",
-          100: "#353535",
+          100: "#353535"
         },
         white: {
           DEFAULT: "#FFFFFF",
@@ -102,7 +100,7 @@ const config: Config = {
           900: "#388EAE"
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
+          DEFAULT: "hsl(var(--destructive))"
         },
 
         rounded: "hsl(var(--radius))",
@@ -134,7 +132,7 @@ const config: Config = {
       backgroundImage: {
         "gradient-primary": "linear-gradient(45deg, #5655D7 0%, #7F7EFF 100%)",
         "gradient-primary-hover":
-          "linear-gradient(45deg, #5655D7e6 0%, #7F7EFFe6 100%)",
+          "linear-gradient(45deg, #5655D7e6 0%, #7F7EFFe6 100%)"
       },
       keyframes: {
         "accordion-down": {

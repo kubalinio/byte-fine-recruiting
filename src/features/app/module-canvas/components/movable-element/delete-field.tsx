@@ -19,7 +19,7 @@ const DeleteField = {
     return (
       <Button
         key='delete-button'
-        className='absolute -right-0 z-[3002] size-fit rounded-full bg-white p-1 text-destructive hover:bg-white-50'
+        className='absolute -right-0 z-[3002] size-fit rounded-full bg-white p-1 text-destructive shadow-md hover:bg-white-50'
         style={{
           transform: `translate(45%, -50%)` + `translateX(${origin[0] * 2}px)`
         }}
